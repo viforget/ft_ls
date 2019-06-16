@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/16 18:52:32 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/16 19:36:51 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,11 @@ typedef struct		s_info
 /*
 ** MAIN.C
 */
+
+/*
+** PARSING.C
+*/
+
+int					parsing(char **argv, int *flags);
 
 #endif

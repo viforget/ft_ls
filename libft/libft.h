@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viforget <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 22:51:20 by viforget          #+#    #+#             */
-/*   Updated: 2019/04/29 15:33:29 by viforget         ###   ########.fr       */
+/*   Updated: 2019/06/16 19:30:27 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ long				ft_atol(const char *str);
 int					ft_is_div_by(int n, int div);
 int					ft_sqrt(int nb);
 void				ft_swap(int *a, int *b);
-void				ft_puttab(char **tab, size_t n);
+void				ft_puttab(char **tab);
 char				*ft_strjoindel(char *s1, char const *s2);
 char				*ft_strnjoin(char const *s1, char const *s2, size_t n);
 char				*ft_strnjoindel(char *s1, char const *s2, size_t n);
