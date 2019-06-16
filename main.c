@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/16 19:12:30 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/16 19:29:25 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,5 @@ int			main(int argc, char **argv)
 	int		flags;
 
 	i = parsing(argv, &flags);
-	if (argv[i] == NULL)
-		;
 	return (0);
 }
