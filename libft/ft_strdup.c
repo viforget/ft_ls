@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: viforget <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/02 13:35:00 by viforget          #+#    #+#             */
-/*   Updated: 2019/05/30 20:32:02 by viforget         ###   ########.fr       */
+/*   Updated: 2019/06/18 00:53:54 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *src)
 	i = 0;
 	if (!src)
 		return (NULL);
-	if (!(dest = (char *)malloc(sizeof(*dest) * ft_strlen(src) + 1)))
+	if (!(dest = (char *)ft_memalloc(sizeof(*dest) * ft_strlen(src) + 1)))
 		return (NULL);
 	while (src[i] != '\0')
 	{

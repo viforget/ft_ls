@@ -6,17 +6,17 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 19:35:42 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/16 20:53:40 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/17 16:58:01 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static int	ft_option(char *str, int *flags)
+static int		ft_option(char *str, int *flags)
 {
 	static char		*flag = "lRart";
-	int				i;
-	int				j;
+	size_t			i;
+	size_t			j;
 
 	j = 1;
 	while (str[j])
@@ -41,7 +41,7 @@ static int	ft_option(char *str, int *flags)
 
 int				parsing(char **argv, int *flags)
 {
-	int		i;
+	size_t			i;
 
 	i = 1;
 	while (argv[i])
