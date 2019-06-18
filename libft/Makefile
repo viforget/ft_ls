@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: viforget <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: viforget <viforget@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/15 20:55:26 by viforget          #+#    #+#              #
-#    Updated: 2019/04/29 15:32:33 by viforget         ###   ########.fr        #
+#    Updated: 2019/06/18 23:25:29 by ntom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,6 +84,8 @@ SRC = ft_atoi.c\
 	ft_strjoindele.c\
 	ft_strjoindel2.c\
 	ft_tabdel.c\
+	ft_strswap.c\
+	is_on_off.c\
 
 OBJ = ft_atoi.o\
 	ft_memcmp.o\
@@ -157,6 +159,8 @@ OBJ = ft_atoi.o\
 	ft_strjoindele.o\
 	ft_strjoindel2.o\
 	ft_tabdel.o\
+	ft_strswap.o\
+	is_on_off.o\
 
 all : $(NAME)
 

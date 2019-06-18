@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 22:51:20 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/16 19:30:27 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/18 23:28:15 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,17 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/*
+** MACROS
+*/
+
 # define BUFF_SIZE 32
+# define ON 1
+# define OFF 0
+
+/*
+** STRUCTURES
+*/
 
 typedef struct		s_list
 {
@@ -24,6 +34,10 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+/*
+** FONCTIONS
+*/
 
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -98,5 +112,13 @@ size_t				ft_sqrtp(size_t nb);
 char				*ft_strjoindele(char const *s1, char *s2);
 char				*ft_strjoindel2(char *s1, char *s2);
 void				ft_tabdel(char **tab, size_t j);
+void				ft_strswap(char **a, char **b);
+
+/*
+** is_on_off.c
+*/
+
+int					is_on(int i, int j);
+int					is_off(int i, int j);
 
 #endif
