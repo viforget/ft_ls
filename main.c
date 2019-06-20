@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/19 00:08:11 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/20 12:36:49 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,9 @@ static void		ft_ls(char **argv, int flags, int argc)
 int				main(int argc, char **argv)
 {
 	int				flags;
-	size_t			i;
+	int				i;
 
+	flags = 0;
 	i = parsing(argv, &flags);
 	ft_ls(argv + i, flags, argc - i);
 	return (0);
