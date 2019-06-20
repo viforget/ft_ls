@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/20 17:20:48 by viforget         ###   ########.fr       */
+/*   Updated: 2019/06/20 18:16:27 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,7 @@ void	aff_tree(t_info *tree)
 t_info	*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 {
 		noeud = ft_memalloc(sizeof(t_info));
-		ft_putendl("A");
-		ft_putendl(file->d_name);
 		noeud->name = ft_strdup(file->d_name);
-		ft_putendl("B");
 		noeud->path = ft_strjoin(path, noeud->name);
 		noeud->type = file->d_type;
 		noeud->status = lstat(noeud->path, &(noeud->stats));
@@ -52,13 +49,13 @@ static int	compare(int flags, t_info *first, t_info *second)
 	if (is_on(flags, OPT_T))
 	{
 		if ((first->stats.st_mtime - second->stats.st_mtime) > 0)
-			return (is_on(flags, OPT_R) ? 0 : 1);
-		else if ((first->stats.st_mtime - second->stats.st_mtime) < 0)
 			return (is_on(flags, OPT_R) ? 1 : 0);
+		else if ((first->stats.st_mtime - second->stats.st_mtime) < 0)
+			return (is_on(flags, OPT_R) ? 0 : 1);
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
-		return (is_on(flags, OPT_R) ? 0 : 1);
-	return (is_on(flags, OPT_R) ? 1 : 0);
+		return (is_on(flags, OPT_R) ? 1 : 0);
+	return (is_on(flags, OPT_R) ? 0 : 1);
 }
 
 t_info	*bin_stock(t_info *tree, t_info *file, int flags)
@@ -68,7 +65,7 @@ t_info	*bin_stock(t_info *tree, t_info *file, int flags)
 	else if(compare(flags, tree, file))
 		tree->left = bin_stock(tree->left, file, flags);
 	else
-		tree->right = bin_stock(tree->left, file, flags);
+		tree->right = bin_stock(tree->right, file, flags);
 	return (tree);
 }
 
@@ -80,8 +77,9 @@ t_info	*create_tree(DIR *rep, int flags, char *path)
 	t_info			*file;
 
 	tree = NULL;
+	file = NULL;
 	dirr = readdir(rep);
-	while (file)
+	while (dirr)
 	{
 		file = noeud_stock(tree, dirr, path);
 		tree = bin_stock(tree, file, flags);
