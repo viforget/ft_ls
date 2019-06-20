@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/18 01:15:01 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/20 14:55:16 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct		s_info
 {
 	char 			*path;
 	char			*name;
+	unsigned char	type;
 	struct stat		stats;
 	int				status;
 	struct s_info	*left;
