@@ -6,21 +6,11 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/20 12:36:49 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/21 00:47:36 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-
-// static void		init_tree(struct stat *buf, char *argv, t_info *i, char *path)
-// {
-// 	i->name = ft_strdup(argv);
-// 	i->path = ft_strdup(path);
-// 	i->status = lstat(argv, buf);
-// 	i->stats = *buf;
-// 	i->left = NULL;
-// 	i->right = NULL;
-// }
 
 static int		ft_isdir(char *current)
 {
@@ -102,11 +92,6 @@ static void		ft_ls(char **argv, int flags, int argc)
 
 	i = 0;
 	sort_arg(argv, flags, argc);
-	while (i < argc)
-	{
-		printf("argv[%i] == %s\n", i, argv[i]);
-		i++;
-	}
 }
 
 int				main(int argc, char **argv)

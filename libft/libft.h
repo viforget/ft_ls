@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/09 22:51:20 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/18 23:28:15 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/21 00:54:01 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,11 @@ void				ft_strswap(char **a, char **b);
 
 int					is_on(int i, int j);
 int					is_off(int i, int j);
+
+/*
+** ft_putmultstr.c
+*/
+
+int					put_mult_str(int num, ...);
 
 #endif

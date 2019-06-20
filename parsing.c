@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 19:35:42 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/19 15:32:05 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/21 00:57:54 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ static int		ft_option(char *str, int *flags)
 	static char		*flag = "lRart";
 	size_t			i;
 	size_t			j;
+	char			error[2];
 
 	j = 1;
+	error[1] = '\0';
 	while (str[j])
 	{
 		i = 0;
@@ -31,8 +33,11 @@ static int		ft_option(char *str, int *flags)
 			}
 			i++;
 			if (flag[i] == '\0')
-				return (printf("ft_ls: illegal option -- %c\n"
-				"usage: ft_ls [-Ralrt] [file ...]\n", str[j]));
+			{
+				error[0] = str[j];
+				return (put_mult_str(3, "ft_ls: illegal option -- ",
+				error, "\nusage: ft_ls [-Ralrt] [file ...]"));
+			}
 		}
 		j++;
 	}

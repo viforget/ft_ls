@@ -6,7 +6,7 @@
 #    By: viforget <viforget@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/10/15 20:55:26 by viforget          #+#    #+#              #
-#    Updated: 2019/06/18 23:25:29 by ntom             ###   ########.fr        #
+#    Updated: 2019/06/21 00:49:06 by ntom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ SRC = ft_atoi.c\
 	ft_tabdel.c\
 	ft_strswap.c\
 	is_on_off.c\
+	ft_putmultstr.c\
 
 OBJ = ft_atoi.o\
 	ft_memcmp.o\
@@ -161,6 +162,7 @@ OBJ = ft_atoi.o\
 	ft_tabdel.o\
 	ft_strswap.o\
 	is_on_off.o\
+	ft_putmultstr.o\
 
 all : $(NAME)
 
