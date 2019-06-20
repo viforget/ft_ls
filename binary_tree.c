@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/20 18:16:27 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/20 19:41:43 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,16 @@ void	aff_tree(t_info *tree)
 
 t_info	*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 {
-		noeud = ft_memalloc(sizeof(t_info));
-		noeud->name = ft_strdup(file->d_name);
-		noeud->path = ft_strjoin(path, noeud->name);
-		noeud->type = file->d_type;
-		noeud->status = lstat(noeud->path, &(noeud->stats));
-		noeud->left = NULL;
-		noeud->right = NULL;
-		return(noeud);
+	struct stat buf;
+	noeud = ft_memalloc(sizeof(t_info));
+	noeud->name = ft_strdup(file->d_name);
+	noeud->path = ft_strjoin(path, noeud->name);
+	noeud->type = file->d_type;
+	noeud->status = lstat(noeud->path, &(buf));
+	noeud->stats = buf;
+	noeud->left = NULL;
+	noeud->right = NULL;
+	return(noeud);
 }
 
 static int	compare(int flags, t_info *first, t_info *second)
@@ -52,6 +54,9 @@ static int	compare(int flags, t_info *first, t_info *second)
 			return (is_on(flags, OPT_R) ? 1 : 0);
 		else if ((first->stats.st_mtime - second->stats.st_mtime) < 0)
 			return (is_on(flags, OPT_R) ? 0 : 1);
+		if (ft_strcmp(first->name, second->name) < 0)
+			return (is_on(flags, OPT_R) ? 0 : 1);
+		return (is_on(flags, OPT_R) ? 1 : 0);
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
 		return (is_on(flags, OPT_R) ? 1 : 0);
@@ -93,7 +98,7 @@ int main()
 	DIR		*dir;
 	t_info	*tree;
 
-	dir = opendir("libft");
-	tree = create_tree(dir, 0, "./");
+	dir = opendir(".");
+	tree = create_tree(dir, 16, "./");
 	aff_tree(tree);
 }
