@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/20 16:38:20 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/25 13:56:01 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,22 @@
 # define ON 1
 # define OFF 0
 # define OPT_L 0
-# define OPT_MR 1
+# define OPT_UR 1
 # define OPT_A 2
 # define OPT_R 3
 # define OPT_T 4
 
+/*
+** TYPES MACRO
+*/
+
+# define WHITEOUT 57344
+# define SOCKLNK 49152
+# define SYMBLNK 40960
+# define REGULAR 32768
+# define BLOCKSPE 24576
+# define DIRECTOR 16384
+# define CHARSPE 8192
 
 /*
 ** STRUCTURES
@@ -49,7 +60,7 @@
 
 typedef struct		s_info
 {
-	char 			*path;
+	char			*path;
 	char			*name;
 	unsigned char	type;
 	struct stat		stats;
@@ -67,5 +78,11 @@ typedef struct		s_info
 */
 
 int					parsing(char **argv, int *flags);
+
+/*
+** OPTION_L.C
+*/
+
+void				file_type(int value, char ftr[12]);
 
 #endif

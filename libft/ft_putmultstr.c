@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 23:25:47 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/21 00:53:12 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/21 23:55:05 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 
 int			put_mult_str(int num, ...)
 {
-	va_list 	ap;
-	va_list 	ap2;
+	va_list		ap;
 	char		*tmp;
 
 	va_start(ap, num);
-	va_copy(ap2, ap);
 	tmp = NULL;
 	while (num != 0)
 	{

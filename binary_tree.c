@@ -6,13 +6,13 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/20 19:41:43 by viforget         ###   ########.fr       */
+/*   Updated: 2019/06/25 14:04:02 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	del_tree(t_info *tree)
+void		del_tree(t_info *tree)
 {
 	if (tree->left != NULL)
 		del_tree(tree->left);
@@ -23,7 +23,7 @@ void	del_tree(t_info *tree)
 	free(tree);
 }
 
-void	aff_tree(t_info *tree)
+void		aff_tree(t_info *tree)
 {
 	if (tree->left != NULL)
 		aff_tree(tree->left);
@@ -32,9 +32,10 @@ void	aff_tree(t_info *tree)
 		aff_tree(tree->right);
 }
 
-t_info	*noeud_stock(t_info *noeud, struct dirent *file, char *path)
+t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 {
-	struct stat buf;
+	struct stat		buf;
+
 	noeud = ft_memalloc(sizeof(t_info));
 	noeud->name = ft_strdup(file->d_name);
 	noeud->path = ft_strjoin(path, noeud->name);
@@ -43,7 +44,7 @@ t_info	*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 	noeud->stats = buf;
 	noeud->left = NULL;
 	noeud->right = NULL;
-	return(noeud);
+	return (noeud);
 }
 
 static int	compare(int flags, t_info *first, t_info *second)
@@ -55,7 +56,7 @@ static int	compare(int flags, t_info *first, t_info *second)
 		else if ((first->stats.st_mtime - second->stats.st_mtime) < 0)
 			return (is_on(flags, OPT_R) ? 0 : 1);
 		if (ft_strcmp(first->name, second->name) < 0)
-			return (is_on(flags, OPT_R) ? 0 : 1);
+			return (is_on(flags, OPT_R) ? 1 : 0);
 		return (is_on(flags, OPT_R) ? 1 : 0);
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
@@ -63,19 +64,18 @@ static int	compare(int flags, t_info *first, t_info *second)
 	return (is_on(flags, OPT_R) ? 0 : 1);
 }
 
-t_info	*bin_stock(t_info *tree, t_info *file, int flags)
+t_info		*bin_stock(t_info *tree, t_info *file, int flags)
 {
 	if (tree == NULL)
 		return (file);
-	else if(compare(flags, tree, file))
+	else if (compare(flags, tree, file))
 		tree->left = bin_stock(tree->left, file, flags);
 	else
 		tree->right = bin_stock(tree->right, file, flags);
 	return (tree);
 }
 
-
-t_info	*create_tree(DIR *rep, int flags, char *path)
+t_info		*create_tree(DIR *rep, int flags, char *path)
 {
 	struct dirent	*dirr;
 	t_info			*tree;
@@ -93,12 +93,14 @@ t_info	*create_tree(DIR *rep, int flags, char *path)
 	return (tree);
 }
 
-int main()
+int			main(void)
 {
-	DIR		*dir;
-	t_info	*tree;
+	DIR				*dir;
+	t_info			*tree;
+	char			ftr[12];
 
 	dir = opendir(".");
-	tree = create_tree(dir, 16, "./");
-	aff_tree(tree);
+	tree = create_tree(dir, 0, "./");
+	file_type(tree->stats.st_mode, ftr);
+	//aff_tree(tree);
 }
