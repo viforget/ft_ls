@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/25 13:56:01 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/27 15:42:59 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,12 @@ int					parsing(char **argv, int *flags);
 */
 
 void				file_type(int value, char ftr[12]);
+
+/*
+** BINARY_TREE.C
+*/
+
+void			aff_tree(t_info *tree);
+t_info			*create_tree(DIR *rep, int flags, char *path);
 
 #endif

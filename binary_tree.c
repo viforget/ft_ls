@@ -6,18 +6,18 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/25 14:04:02 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/27 18:33:56 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void		del_tree(t_info *tree)
+void		del_tree(t_info *tree, int flag)
 {
 	if (tree->left != NULL)
-		del_tree(tree->left);
+		del_tree(tree->left, flag);
 	if (tree->right != NULL)
-		del_tree(tree->right);
+		del_tree(tree->right, flag);
 	ft_strdel(&tree->name);
 	ft_strdel(&tree->path);
 	free(tree);
@@ -93,6 +93,7 @@ t_info		*create_tree(DIR *rep, int flags, char *path)
 	return (tree);
 }
 
+/*
 int			main(void)
 {
 	DIR				*dir;
@@ -104,3 +105,4 @@ int			main(void)
 	file_type(tree->stats.st_mode, ftr);
 	//aff_tree(tree);
 }
+*/

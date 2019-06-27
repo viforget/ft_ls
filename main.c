@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/21 00:47:36 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/27 18:33:26 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,28 @@ static void		sort_arg(char **argv, int flags, int argc)
 	}
 }
 
-static void		ft_ls(char **argv, int flags, int argc)
+static	void	ft_ls(DIR *dir, int flags, char *str)
 {
+	t_info	*tree;
+
+	tree = create_tree(dir, flags, str);
+	aff_tree(tree);
+}
+
+static void		ft_multi_ls(char **argv, int flags, int argc)
+{
+	DIR *dir;
 	int			i;
 
 	i = 0;
 	sort_arg(argv, flags, argc);
+	while(i < argc)
+	{
+		dir = opendir(argv[i]);
+		ft_ls(dir, flags, argv[i]);
+		i++;
+		closedir(dir);
+	}
 }
 
 int				main(int argc, char **argv)
@@ -101,6 +117,6 @@ int				main(int argc, char **argv)
 
 	flags = 0;
 	i = parsing(argv, &flags);
-	ft_ls(argv + i, flags, argc - i);
+	ft_multi_ls(argv + i, flags, argc - i);
 	return (0);
 }
