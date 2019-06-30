@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/30 17:32:43 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:39:17 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 	noeud->type = file->d_type;
 	noeud->status = lstat(noeud->path, &(buf));
 	noeud->stats = buf;
-	if (is_on(flags, OPT_L))
+	if (is_on(g_flags, OPT_L))
 		stock_l(noeud);
 	noeud->left = NULL;
 	noeud->right = NULL;
@@ -34,16 +34,16 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 
 static int	compare(t_info *first, t_info *second)
 {
-	if (is_on(flags, OPT_T))
+	if (is_on(g_flags, OPT_T))
 	{
 		if (first->stats.st_mtime > second->stats.st_mtime)
-			return (is_on(flags, OPT_R) ? 1 : 0);
+			return (is_on(g_flags, OPT_R) ? 1 : 0);
 		else if (first->stats.st_mtime < second->stats.st_mtime)
-			return (is_on(flags, OPT_R) ? 0 : 1);
+			return (is_on(g_flags, OPT_R) ? 0 : 1);
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
-		return (is_on(flags, OPT_R) ? 1 : 0);
-	return (is_on(flags, OPT_R) ? 0 : 1);
+		return (is_on(g_flags, OPT_R) ? 1 : 0);
+	return (is_on(g_flags, OPT_R) ? 0 : 1);
 }
 
 t_info		*bin_stock(t_info *tree, t_info *file)

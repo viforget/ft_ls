@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 17:34:50 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:39:18 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int		r_compare(char *current, char *next)
 	return (-ft_strcmp(current, next));
 }
 
-static void		sort_arg(char **argv, int flags, int argc)
+static void		sort_arg(char **argv, int g_flags, int argc)
 {
 	int				i;
 
@@ -70,13 +70,13 @@ static void		sort_arg(char **argv, int flags, int argc)
 	{
 		if (argv[i][0] == '\0')
 			return (ft_putendl("ft_ls: fts_open: No such file or directory"));
-		if (compare(argv[i], argv[i + 1]) > 0 && is_off(flags, OPT_R))
+		if (compare(argv[i], argv[i + 1]) > 0 && is_off(g_flags, OPT_R))
 		{
 			ft_strswap(&argv[i], &argv[i + 1]);
 			i = 0;
 			continue ;
 		}
-		else if (r_compare(argv[i], argv[i + 1]) > 0 && is_on(flags, OPT_R))
+		else if (r_compare(argv[i], argv[i + 1]) > 0 && is_on(g_flags, OPT_R))
 		{
 			ft_strswap(&argv[i], &argv[i + 1]);
 			i = 0;
@@ -103,7 +103,7 @@ void	ft_ls(char *st, char *path)
 	del_tree(tree);
 }
 
-/*static void		ft_multi_ls(char **argv, int flags, int argc)
+/*static void		ft_multi_ls(char **argv, int g_flags, int argc)
 {
 	int			i;
 
@@ -120,8 +120,8 @@ int				main(int argc, char **argv)
 {
 	int				i;
 
-	flags = 0;
-	i = parsing(argv, &flags);
+	g_flags = 0;
+	i = parsing(argv, &g_flags);
 	if (i == argc)
 		ft_ls(".", ".");
 	//else

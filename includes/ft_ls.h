@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 17:34:00 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:38:44 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@
 ** GLOBAL
 */
 
-int			flags;
+int					g_flags;
 
 /*
 ** STRUCTURES
@@ -100,15 +100,15 @@ void				stock_l(t_info *noeud);
 ** BINARY_TREE.C
 */
 
-void			aff_tree(t_info *tree);
-t_info			*create_tree(DIR *rep, char *path);
-void			del_tree(t_info *tree);
+void				aff_tree(t_info *tree);
+t_info				*create_tree(DIR *rep, char *path);
+void				del_tree(t_info *tree);
 
 /*
 ** AFF_DEL_TREE.C
 */
 
-void			del_tree(t_info *tree);
-void			aff_tree(t_info *tree);
+void				del_tree(t_info *tree);
+void				aff_tree(t_info *tree);
 
 #endif

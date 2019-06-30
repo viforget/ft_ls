@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 17:34:08 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:39:10 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void		del_tree(t_info *tree)
 {
 	if (tree->left != NULL)
 		del_tree(tree->left);
-	if (is_on(flags, OPT_UR) && tree->type == 4
+	if (is_on(g_flags, OPT_UR) && tree->type == 4
 			&& ft_strcmp(tree->name, ".") != 0
 			&& ft_strcmp(tree->name, "..") != 0
-			&& (is_on(flags, OPT_A) || tree->name[0] != '.'))
+			&& (is_on(g_flags, OPT_A) || tree->name[0] != '.'))
 	{
 		put_mult_str(3, "\n", tree->path, ":");
 		ft_ls(tree->name, tree->path);
@@ -36,9 +36,9 @@ void		aff_tree(t_info *tree)
 {
 	if (tree->left != NULL)
 		aff_tree(tree->left);
-	if (is_on(flags, OPT_A) || tree->name[0] != '.')
+	if (is_on(g_flags, OPT_A) || tree->name[0] != '.')
 	{
-		if (is_on(flags, OPT_L))
+		if (is_on(g_flags, OPT_L))
 			ft_putstr(tree->ftr);
 		ft_putendl(tree->name);
 	}
