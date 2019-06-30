@@ -73,6 +73,8 @@ typedef struct		s_info
 ** MAIN.C
 */
 
+void				ft_ls(char *st, int flags, char *path);
+
 /*
 ** PARSING.C
 */
@@ -89,7 +91,8 @@ void				file_type(int value, char ftr[12]);
 ** BINARY_TREE.C
 */
 
-void			aff_tree(t_info *tree);
+void			aff_tree(t_info *tree, int flags);
 t_info			*create_tree(DIR *rep, int flags, char *path);
+void			del_tree(t_info *tree, int flags);
 
 #endif

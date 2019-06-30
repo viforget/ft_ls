@@ -15,7 +15,7 @@ CC = gcc
 CFLAGS += -Wall -Wextra -Werror -I includes
 LIBDIR = libft
 
-SRC = main.c parsing.c
+SRC = main.c parsing.c binary_tree.c option_l.c
 
 O_FILES = $(SRC:%.c=%.o)
 FLAGLIB = -L$(LIBDIR) -lft

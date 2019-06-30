@@ -12,33 +12,44 @@
 
 #include "includes/ft_ls.h"
 
-void		del_tree(t_info *tree, int flag)
+void		del_tree(t_info *tree, int flags)
 {
 	if (tree->left != NULL)
-		del_tree(tree->left, flag);
+		del_tree(tree->left, flags);
+	if (is_on(flags, OPT_UR) && tree->type == 4 && ft_strcmp(tree->name, ".") != 0 
+			&& ft_strcmp(tree->name, "..") != 0 
+			&& (is_on(flags, OPT_A) || tree->name[0] != '.'))
+	{
+		put_mult_str(3, "\n", tree->path, ":");
+		ft_ls(tree->name, flags, tree->path);
+	}
 	if (tree->right != NULL)
-		del_tree(tree->right, flag);
+		del_tree(tree->right, flags);
 	ft_strdel(&tree->name);
 	ft_strdel(&tree->path);
 	free(tree);
 }
 
-void		aff_tree(t_info *tree)
+void		aff_tree(t_info *tree, int flags)
 {
 	if (tree->left != NULL)
-		aff_tree(tree->left);
-	ft_putendl(tree->name);
+		aff_tree(tree->left, flags);
+	if (is_on(flags, OPT_A) || tree->name[0] != '.')
+		ft_putendl(tree->name);
 	if (tree->right != NULL)
-		aff_tree(tree->right);
+		aff_tree(tree->right, flags);
 }
 
 t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 {
 	struct stat		buf;
+	char *str;
 
+	str = ft_strjoin(path, "/");
 	noeud = ft_memalloc(sizeof(t_info));
 	noeud->name = ft_strdup(file->d_name);
-	noeud->path = ft_strjoin(path, noeud->name);
+	noeud->path = ft_strjoin(str, noeud->name);
+	ft_strdel(&str);
 	noeud->type = file->d_type;
 	noeud->status = lstat(noeud->path, &(buf));
 	noeud->stats = buf;
@@ -51,13 +62,13 @@ static int	compare(int flags, t_info *first, t_info *second)
 {
 	if (is_on(flags, OPT_T))
 	{
-		if ((first->stats.st_mtime - second->stats.st_mtime) > 0)
-			return (is_on(flags, OPT_R) ? 1 : 0);
-		else if ((first->stats.st_mtime - second->stats.st_mtime) < 0)
+		if (first->stats.st_mtime > second->stats.st_mtime)
 			return (is_on(flags, OPT_R) ? 0 : 1);
-		if (ft_strcmp(first->name, second->name) < 0)
+		else if (first->stats.st_mtime < second->stats.st_mtime)
 			return (is_on(flags, OPT_R) ? 1 : 0);
-		return (is_on(flags, OPT_R) ? 1 : 0);
+		/*if (ft_strcmp(first->name, second->name) < 0)
+			return (is_on(flags, OPT_R) ? 0 : 1);
+		return (is_on(flags, OPT_R) ? 1 : 0);*/
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
 		return (is_on(flags, OPT_R) ? 1 : 0);

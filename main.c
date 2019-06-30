@@ -86,27 +86,33 @@ static void		sort_arg(char **argv, int flags, int argc)
 	}
 }
 
-static	void	ft_ls(DIR *dir, int flags, char *str)
+void	ft_ls(char *st, int flags, char *path)
 {
 	t_info	*tree;
+	DIR 	*dir;
 
-	tree = create_tree(dir, flags, str);
-	aff_tree(tree);
+	tree = NULL;
+	dir = opendir(path);
+	if (dir)
+		tree = create_tree(dir, flags, path);
+	else if (errno == ENOTDIR)
+		ft_putendl(st);
+	else
+		put_mult_str(3, "ft_ls: ", st, ": No such file or directory");
+	aff_tree(tree, flags);
+	del_tree(tree, flags);
 }
 
 static void		ft_multi_ls(char **argv, int flags, int argc)
 {
-	DIR *dir;
 	int			i;
 
 	i = 0;
 	sort_arg(argv, flags, argc);
 	while(i < argc)
 	{
-		dir = opendir(argv[i]);
-		ft_ls(dir, flags, argv[i]);
+		ft_ls(argv[i], flags, argv[i]);
 		i++;
-		closedir(dir);
 	}
 }
 
@@ -117,6 +123,9 @@ int				main(int argc, char **argv)
 
 	flags = 0;
 	i = parsing(argv, &flags);
-	ft_multi_ls(argv + i, flags, argc - i);
+	if (i == argc)
+		ft_ls(".", flags, ".");
+	else
+		ft_multi_ls(argv + i, flags, argc - i);
 	return (0);
 }
