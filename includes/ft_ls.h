@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 16:37:09 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:34:00 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@
 # define CHARSPE 8192
 
 /*
+** GLOBAL
+*/
+
+int			flags;
+
+/*
 ** STRUCTURES
 */
 
@@ -74,7 +80,7 @@ typedef struct		s_info
 ** MAIN.C
 */
 
-void				ft_ls(char *st, int flags, char *path);
+void				ft_ls(char *st, char *path);
 
 /*
 ** PARSING.C
@@ -86,14 +92,23 @@ int					parsing(char **argv, int *flags);
 ** OPTION_L.C
 */
 
+char				*ft_xattr(char *path);
 char				*file_type(int value);
+void				stock_l(t_info *noeud);
 
 /*
 ** BINARY_TREE.C
 */
 
-void			aff_tree(t_info *tree, int flags);
-t_info			*create_tree(DIR *rep, int flags, char *path);
-void			del_tree(t_info *tree, int flags);
+void			aff_tree(t_info *tree);
+t_info			*create_tree(DIR *rep, char *path);
+void			del_tree(t_info *tree);
+
+/*
+** AFF_DEL_TREE.C
+*/
+
+void			del_tree(t_info *tree);
+void			aff_tree(t_info *tree);
 
 #endif

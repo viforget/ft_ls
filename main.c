@@ -6,13 +6,13 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 15:56:06 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:34:50 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static int		ft_isdir(char *current)
+/*static int		ft_isdir(char *current)
 {
 	struct stat		buf;
 
@@ -84,9 +84,9 @@ static void		sort_arg(char **argv, int flags, int argc)
 		}
 		i++;
 	}
-}
+}*/
 
-void	ft_ls(char *st, int flags, char *path)
+void	ft_ls(char *st, char *path)
 {
 	t_info	*tree;
 	DIR 	*dir;
@@ -94,38 +94,37 @@ void	ft_ls(char *st, int flags, char *path)
 	tree = NULL;
 	dir = opendir(path);
 	if (dir)
-		tree = create_tree(dir, flags, path);
+		tree = create_tree(dir, path);
 	else if (errno == ENOTDIR)
 		ft_putendl(st);
 	else
 		put_mult_str(3, "ft_ls: ", st, ": No such file or directory");
-	aff_tree(tree, flags);
-	del_tree(tree, flags);
+	aff_tree(tree);
+	del_tree(tree);
 }
 
-static void		ft_multi_ls(char **argv, int flags, int argc)
+/*static void		ft_multi_ls(char **argv, int flags, int argc)
 {
 	int			i;
 
 	i = 0;
-	sort_arg(argv, flags, argc);
+	sort_arg(argv, argc);
 	while(i < argc)
 	{
-		ft_ls(argv[i], flags, argv[i]);
+		ft_ls(argv[i], argv[i]);
 		i++;
 	}
-}
+}*/
 
 int				main(int argc, char **argv)
 {
-	int				flags;
 	int				i;
 
 	flags = 0;
 	i = parsing(argv, &flags);
 	if (i == argc)
-		ft_ls(".", flags, ".");
-	else
-		ft_multi_ls(argv + i, flags, argc - i);
+		ft_ls(".", ".");
+	//else
+	//	ft_multi_ls(argv + i, argc - i);
 	return (0);
 }

@@ -6,11 +6,26 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 16:36:35 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 17:22:11 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+char		*ft_xattr(char *path)
+{
+	ssize_t	tmp;
+	acl_t	acl;
+
+	if ((acl = acl_get_file(path, ACL_TYPE_EXTENDED)) != (acl_t)NULL)
+	{
+		acl_free((void*)acl);
+		return ("+");
+	}
+	else if ((tmp = listxattr(path, NULL, 0, XATTR_NOFOLLOW)) > 0)
+		return ("@");
+	return (" ");
+}
 
 static void	rights(int value, char ftr[12])
 {
@@ -38,7 +53,8 @@ char		*file_type(int value)
 {
 	char		*ftr;
 
-	ftr = ft_memalloc(sizeof(char) * 12);
+	if (!(ftr = ft_memalloc(sizeof(char) * 12)))
+		return (NULL);
 	if (value >= WHITEOUT)
 		ftr[0] = 'w';
 	else if (value >= SOCKLNK)
@@ -58,4 +74,10 @@ char		*file_type(int value)
 	rights(value, ftr);
 	ftr[11] = '\0';
 	return (ftr);
+}
+
+void		stock_l(t_info *noeud)
+{
+	noeud->ftr = ft_strdup(file_type(noeud->stats.st_mode));
+	noeud->ftr = ft_strjoindel(noeud->ftr, ft_xattr(noeud->path));
 }
