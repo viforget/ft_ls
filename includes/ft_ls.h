@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/27 15:42:59 by viforget         ###   ########.fr       */
+/*   Updated: 2019/06/30 16:37:09 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ typedef struct		s_info
 	unsigned char	type;
 	struct stat		stats;
 	int				status;
+	char			*ftr;
 	struct s_info	*left;
 	struct s_info	*right;
 }					t_info;
@@ -85,7 +86,7 @@ int					parsing(char **argv, int *flags);
 ** OPTION_L.C
 */
 
-void				file_type(int value, char ftr[12]);
+char				*file_type(int value);
 
 /*
 ** BINARY_TREE.C

@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/25 14:03:57 by ntom             ###   ########.fr       */
+/*   Updated: 2019/06/30 16:36:35 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,11 @@ static void	rights(int value, char ftr[12])
 		ftr[9] = ((value & S_IXOTH) ? 'x' : '-');
 }
 
-void		file_type(int value, char ftr[12])
+char		*file_type(int value)
 {
+	char		*ftr;
+
+	ftr = ft_memalloc(sizeof(char) * 12);
 	if (value >= WHITEOUT)
 		ftr[0] = 'w';
 	else if (value >= SOCKLNK)
@@ -53,6 +56,6 @@ void		file_type(int value, char ftr[12])
 	else
 		ftr[0] = 'p';
 	rights(value, ftr);
-	ftr[11] = ' ';
-	ft_putendl(ftr);
+	ftr[11] = '\0';
+	return (ftr);
 }

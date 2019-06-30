@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/27 18:33:26 by viforget         ###   ########.fr       */
+/*   Updated: 2019/06/30 15:56:06 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ static void		sort_arg(char **argv, int flags, int argc)
 	int				i;
 
 	i = 0;
-	while (i < argc - 1)
+	while (i < argc)
 	{
-		if (i < argc && argv[i][0] == '\0')
+		if (argv[i][0] == '\0')
 			return (ft_putendl("ft_ls: fts_open: No such file or directory"));
 		if (compare(argv[i], argv[i + 1]) > 0 && is_off(flags, OPT_R))
 		{
