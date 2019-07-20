@@ -6,11 +6,12 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/10 14:54:47 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/20 18:14:33 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+# define _6MOIS 15552000
 
 void		del_tree(t_info *tree)
 {
@@ -61,7 +62,17 @@ static void		aff_l(t_info *tree)
 		ft_putnbr(major(tree->stats.st_rdev));
 		ft_putnbr(minor(tree->stats.st_rdev));
 	}
+	char *tmp = NULL;
 	ft_putchar(' ');
+	tmp = ctime(&tree->stats.st_mtime);
+	tmp[10] = '\0';
+	tmp[16] = '\0';
+	ft_putstr(tmp + 4);
+	tmp[24] = '\0';
+	if (time(NULL) < tree->stats.st_mtime || time(NULL) - tree->stats.st_mtime > _6MOIS)
+		put_mult_str(3, "  ", tmp + 20, " ");
+	else
+		put_mult_str(3, " ", tmp + 11, " ");
 }
 
 void		aff_tree(t_info *tree)
