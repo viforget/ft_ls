@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 17:39:18 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/28 20:12:00 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,14 @@ void	ft_ls(char *st, char *path)
 	tree = NULL;
 	dir = opendir(path);
 	if (dir)
+	{
 		tree = create_tree(dir, path);
+		closedir(dir);
+	}
 	else if (errno == ENOTDIR)
 		ft_putendl(st);
 	else
-		put_mult_str(3, "ft_ls: ", st, ": No such file or directory");
+		put_mult_str(3, "ft_ls: ", st, ": No such file or directory\n");
 	aff_tree(tree);
 	del_tree(tree);
 }

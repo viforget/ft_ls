@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/30 17:38:44 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/28 21:39:45 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <uuid/uuid.h>
 
 /*
-** MACRO
+** OPTION MACROS
 */
 
 # define ON 1
@@ -43,7 +43,7 @@
 # define OPT_T 4
 
 /*
-** TYPES MACRO
+** TYPES MACROS
 */
 
 # define WHITEOUT 57344
@@ -72,6 +72,14 @@ typedef struct		s_info
 	struct stat		stats;
 	int				status;
 	char			*ftr;
+	char			*links;
+	char			*uid;
+	char			*grid;
+	char			*size;
+	char			*maj;
+	char			*min;
+	char			*month_day;
+	char			*year;
 	struct s_info	*left;
 	struct s_info	*right;
 }					t_info;
