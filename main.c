@@ -6,13 +6,13 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 18:58:43 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 22:16:18 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-/*static int		ft_isdir(char *current)
+static int		ft_isdir(char *current)
 {
 	struct stat		buf;
 
@@ -61,15 +61,17 @@ static int		r_compare(char *current, char *next)
 	return (-ft_strcmp(current, next));
 }
 
-static void		sort_arg(char **argv, int g_flags, int argc)
+static void		sort_arg(char **argv, int argc)
 {
 	int				i;
 
 	i = 0;
 	while (i < argc)
 	{
+		printf("argv[%d] == %s\n", i, argv[i]);
 		if (argv[i][0] == '\0')
 			return (ft_putendl("ft_ls: fts_open: No such file or directory"));
+		printf("argv[%d] == %s\n", i, argv[i]);
 		if (compare(argv[i], argv[i + 1]) > 0 && is_off(g_flags, OPT_R))
 		{
 			ft_strswap(&argv[i], &argv[i + 1]);
@@ -82,9 +84,10 @@ static void		sort_arg(char **argv, int g_flags, int argc)
 			i = 0;
 			continue ;
 		}
+		printf("argv[%d] == %s\n", i, argv[i]);
 		i++;
 	}
-}*/
+}
 
 void			ft_ls(char *st, char *path)
 {
@@ -93,6 +96,7 @@ void			ft_ls(char *st, char *path)
 	unsigned int	blocks;
 
 	tree = NULL;
+	blocks = 0;
 	dir = opendir(path);
 	if (dir)
 	{
@@ -102,7 +106,10 @@ void			ft_ls(char *st, char *path)
 	else if (errno == ENOTDIR)
 		ft_putendl(st);
 	else
+	{
 		put_mult_str(3, "ft_ls: ", st, ": No such file or directory\n");
+		return ;
+	}
 	if (is_on(g_flags, OPT_L))
 	{
 		ft_putstr("total ");
@@ -113,7 +120,7 @@ void			ft_ls(char *st, char *path)
 	del_tree(tree);
 }
 
-/*static void		ft_multi_ls(char **argv, int g_flags, int argc)
+static void		ft_multi_ls(char **argv, int argc)
 {
 	int			i;
 
@@ -124,17 +131,18 @@ void			ft_ls(char *st, char *path)
 		ft_ls(argv[i], argv[i]);
 		i++;
 	}
-}*/
+}
 
 int				main(int argc, char **argv)
 {
 	int				i;
 
 	g_flags = 0;
-	i = parsing(argv, &g_flags);
+	i = parsing(argv);
+	printf("(argv + %d)[3] == %s\n", i, (argv + i)[3]);
 	if (i == argc)
 		ft_ls(".", ".");
-	//else
-	//	ft_multi_ls(argv + i, argc - i);
+	else
+		ft_multi_ls(argv + i, argc - i);
 	return (0);
 }

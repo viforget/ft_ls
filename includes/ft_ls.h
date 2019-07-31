@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 20:42:19 by viforget         ###   ########.fr       */
+/*   Updated: 2019/07/31 22:05:59 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void				ft_ls(char *st, char *path);
 ** PARSING.C
 */
 
-int					parsing(char **argv, int *flags);
+int					parsing(char **argv);
 
 /*
 ** OPTION_L.C
@@ -120,10 +120,10 @@ void				del_tree(t_info *tree);
 void				aff_tree(t_info *tree);
 
 /*
-** COLUMN.C 
+** COLUMN.C
 */
 
-void				cnt_column(t_info* tree, size_t (*col)[7]);
-void				init_null(size_t *(col[7]));
+void				cnt_column(t_info* tree, size_t col[7]);
+void				init_null(size_t col[7]);
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 19:35:42 by ntom              #+#    #+#             */
-/*   Updated: 2019/06/21 00:57:54 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 22:05:50 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static int		ft_option(char *str, int *flags)
+static int		ft_option(char *str)
 {
 	static char		*flag = "lRart";
 	size_t			i;
@@ -28,7 +28,7 @@ static int		ft_option(char *str, int *flags)
 		{
 			if (str[j] == flag[i])
 			{
-				*flags |= ON << i;
+				g_flags |= ON << i;
 				break ;
 			}
 			i++;
@@ -44,7 +44,7 @@ static int		ft_option(char *str, int *flags)
 	return (0);
 }
 
-int				parsing(char **argv, int *flags)
+int				parsing(char **argv)
 {
 	size_t			i;
 
@@ -59,7 +59,7 @@ int				parsing(char **argv, int *flags)
 			break ;
 		}
 		if (argv[i][0] == '-')
-			ft_option(argv[i], flags);
+			ft_option(argv[i]);
 		i++;
 	}
 	return (i);
