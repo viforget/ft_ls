@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 18:46:32 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 20:42:19 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,12 @@ void				del_tree(t_info *tree);
 
 void				del_tree(t_info *tree);
 void				aff_tree(t_info *tree);
+
+/*
+** COLUMN.C 
+*/
+
+void				cnt_column(t_info* tree, size_t (*col)[7]);
+void				init_null(size_t *(col[7]));
 
 #endif
