@@ -6,13 +6,14 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/06/30 17:39:17 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 18:56:14 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path)
+t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path
+	, unsigned int *blocks)
 {
 	struct stat		buf;
 	char			*str;
@@ -27,6 +28,9 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path)
 	noeud->stats = buf;
 	if (is_on(g_flags, OPT_L))
 		stock_l(noeud);
+	if (is_on(g_flags, OPT_L)
+		&& (is_on(g_flags, OPT_A) || file->d_name[0] != '.'))
+		*blocks += buf.st_blocks;
 	noeud->left = NULL;
 	noeud->right = NULL;
 	return (noeud);
@@ -57,7 +61,7 @@ t_info		*bin_stock(t_info *tree, t_info *file)
 	return (tree);
 }
 
-t_info		*create_tree(DIR *rep, char *path)
+t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks)
 {
 	struct dirent	*dirr;
 	t_info			*tree;
@@ -68,7 +72,7 @@ t_info		*create_tree(DIR *rep, char *path)
 	dirr = readdir(rep);
 	while (dirr)
 	{
-		file = noeud_stock(tree, dirr, path);
+		file = noeud_stock(tree, dirr, path, blocks);
 		tree = bin_stock(tree, file);
 		dirr = readdir(rep);
 	}

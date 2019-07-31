@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 18:19:11 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 18:46:32 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void				stock_l(t_info *noeud);
 */
 
 void				aff_tree(t_info *tree);
-t_info				*create_tree(DIR *rep, char *path);
+t_info				*create_tree(DIR *rep, char *path, unsigned int *blocks);
 void				del_tree(t_info *tree);
 
 /*
