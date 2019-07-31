@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/28 23:23:49 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 18:21:59 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void		stock_l(t_info *node)
 	if (getpwuid(node->stats.st_uid) == NULL)
 		node->uid = ft_itoa(node->stats.st_uid);
 	else
-		node->uid = getpwuid(node->stats.st_uid)->pw_name;
+		node->uid = ft_strdup(getpwuid(node->stats.st_uid)->pw_name);
 	if (getgrgid(node->stats.st_gid) == NULL)
 		node->grid = ft_itoa(node->stats.st_gid);
 	else
-		node->grid = getgrgid(node->stats.st_gid)->gr_name;
+		node->grid = ft_strdup(getgrgid(node->stats.st_gid)->gr_name);
 	if (node->ftr[0] != 'c' && node->ftr[0] != 'b')
 		node->size = ft_itoa(node->stats.st_size);
 	else
@@ -103,11 +103,11 @@ void		stock_l(t_info *node)
 	tmp = ctime(&node->stats.st_mtime);
 	tmp[10] = '\0';
 	tmp[16] = '\0';
-	node->month_day = (tmp + 4);
+	node->month_day = ft_strdup(tmp + 4);
 	tmp[24] = '\0';
 	if (time(NULL) < node->stats.st_mtime
 		|| time(NULL) - node->stats.st_mtime > _6MONTHS)
-		node->year = (tmp + 20);
+		node->hour_year = ft_strdup(tmp + 20);
 	else
-		node->year = (tmp + 11);
+		node->hour_year = ft_strdup(tmp + 11);
 }

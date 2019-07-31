@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/28 21:39:45 by ntom             ###   ########.fr       */
+/*   Updated: 2019/07/31 18:19:11 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct		s_info
 	char			*maj;
 	char			*min;
 	char			*month_day;
-	char			*year;
+	char			*hour_year;
 	struct s_info	*left;
 	struct s_info	*right;
 }					t_info;
