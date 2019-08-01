@@ -96,13 +96,14 @@ void			ft_ls(char *st, char *path)
 	t_info			*tree;
 	DIR				*dir;
 	unsigned int	blocks;
+	size_t			col[7];
 
 	tree = NULL;
 	blocks = 0;
 	dir = opendir(path);
 	if (dir)
 	{
-		tree = create_tree(dir, path, &blocks);
+		tree = create_tree(dir, path, &blocks, col);
 		closedir(dir);
 	}
 	else if (errno == ENOTDIR)
@@ -118,7 +119,7 @@ void			ft_ls(char *st, char *path)
 		ft_putnbr(blocks);
 		ft_putchar('\n');
 	}
-	aff_tree(tree);
+	aff_tree(tree, col);
 	del_tree(tree);
 }
 

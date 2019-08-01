@@ -34,9 +34,14 @@ void		del_tree(t_info *tree)
 	free(tree);
 }
 
-static void		aff_l(t_info *tree)
+static void		aff_l(t_info *tree, size_t col[7])
 {
-	if (tree->size != NULL)
+	char *str;
+
+	str = string_l(col, tree);
+	ft_putstr(str);
+	ft_strdel(&str);
+	/*if (tree->size != NULL)
 		put_mult_str(14,
 			tree->ftr, " ",
 			tree->links, " ",
@@ -54,19 +59,19 @@ static void		aff_l(t_info *tree)
 			tree->min, ", ",
 			tree->maj, " ",
 			tree->month_day, " ",
-			tree->hour_year, " ");
+			tree->hour_year, " ");*/
 }
 
-void		aff_tree(t_info *tree)
+void		aff_tree(t_info *tree, size_t col[7])
 {
 	if (tree->left != NULL)
-		aff_tree(tree->left);
+		aff_tree(tree->left, col);
 	if (is_on(g_flags, OPT_A) || tree->name[0] != '.')
 	{
 		if (is_on(g_flags, OPT_L))
-			aff_l(tree);
+			aff_l(tree, col);
 		ft_putendl(tree->name);
 	}
 	if (tree->right != NULL)
-		aff_tree(tree->right);
+		aff_tree(tree->right, col);
 }

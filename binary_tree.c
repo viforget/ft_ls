@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/01 15:15:18 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/01 16:24:40 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_info		*bin_stock(t_info *tree, t_info *file)
 	return (tree);
 }
 
-t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks)
+t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7])
 {
 	struct dirent	*dirr;
 	t_info			*tree;
