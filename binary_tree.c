@@ -61,15 +61,15 @@ t_info		*bin_stock(t_info *tree, t_info *file)
 	return (tree);
 }
 
-t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks)
+t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7])
 {
 	struct dirent	*dirr;
 	t_info			*tree;
 	t_info			*file;
-	size_t 			col[7];
+	
 
 	col [0] = 11;
-	init_null(col);
+	//init_null(col);
 	tree = NULL;
 	file = NULL;
 	dirr = readdir(rep);

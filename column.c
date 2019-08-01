@@ -12,6 +12,7 @@
 
 #include "includes/ft_ls.h"
 
+/*
 void	init_null(size_t col[7])
 {
 	int i;
@@ -21,6 +22,62 @@ void	init_null(size_t col[7])
 	{
 		col[i++] = 0;
 	}
+}
+*/
+
+void	setstr(char *bstr, char *str, int nbr)
+{
+	int i;
+
+	i = ft_strlen(str) - 1;
+	nbr--;
+	while (i >= 0 && bstr[nbr] && str[i])
+	{
+		bstr[nbr] = str[i];
+		i--;
+		nbr--;
+	}
+	free(str);
+}
+
+void	setstr2(char *bstr, char *str, int nbr)
+{
+	int i;
+
+	i = 0;
+	nbr++;
+	while (bstr[nbr] && str[i])
+	{
+		bstr[nbr] = str[i];
+		i++;
+		nbr++;
+	}
+	free(str);
+}
+
+char 	*string_l(size_t col[7], t_info *node)
+{
+	int		i;
+	char	*str;
+
+	i = 1;
+	while(i < 7)
+	{
+		col[i] = col[i - i] + col[i];
+		i++;
+	}
+	ft_putendl("A");
+	str = (char *)ft_memalloc(col[6] + 11);
+	ft_putendl("B");
+	str = ft_memset(str, 32, col[6] + 10);
+	setstr(str, node->ftr, col[0] + 1);
+	setstr(str, node->links, col[1] + 2);
+	setstr2(str, node->uid, col[1] + 2);
+	setstr2(str, node->grid, col[2] + 4);
+	setstr(str, node->size, col[4] + 6);
+	setstr(str, node->month_day, col[5] + 7);
+	setstr(str, node->hour_year, col[6] + 8);
+	return (str);
 }
 
 void	cnt_column(t_info* tree, size_t col[7])
