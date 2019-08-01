@@ -6,12 +6,12 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 18:21:59 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/01 15:16:05 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-# define _6MONTHS 15552000
+#define _6MONTHS 15552000
 
 char		*ft_xattr(char *path)
 {

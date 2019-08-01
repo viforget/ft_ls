@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 19:40:59 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/01 16:33:45 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/01 16:51:03 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	init_null(size_t col[7])
 	int i;
 
 	i = 1;
-	while(i < 7)
+	while (i < 7)
 	{
 		col[i++] = 0;
 	}
@@ -87,7 +87,7 @@ char 	*string_l(size_t col[7], t_info *node)
 	return (str);
 }
 
-void	cnt_column(t_info* tree, size_t col[7])
+void	cnt_column(t_info *tree, size_t col[7])
 {
 	if (tree->links != NULL && col[1] < ft_strlen(tree->links))
 		col[1] = ft_strlen(tree->links);
