@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 19:40:59 by viforget          #+#    #+#             */
-/*   Updated: 2019/07/31 21:37:08 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/01 16:33:45 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	setstr(char *bstr, char *str, int nbr)
 		i--;
 		nbr--;
 	}
-	free(str);
 }
 
 void	setstr2(char *bstr, char *str, int nbr)
@@ -52,7 +51,6 @@ void	setstr2(char *bstr, char *str, int nbr)
 		i++;
 		nbr++;
 	}
-	free(str);
 }
 
 char 	*string_l(size_t col[7], t_info *node)
@@ -66,17 +64,26 @@ char 	*string_l(size_t col[7], t_info *node)
 		col[i] = col[i - i] + col[i];
 		i++;
 	}
-	ft_putendl("A");
+	ft_putendl("1");
 	str = (char *)ft_memalloc(col[6] + 11);
-	ft_putendl("B");
+	ft_putendl("2");
 	str = ft_memset(str, 32, col[6] + 10);
+	ft_putendl("3");
 	setstr(str, node->ftr, col[0] + 1);
+	ft_putnbr(col[1]);
+	ft_putendl("4");
 	setstr(str, node->links, col[1] + 2);
+	ft_putendl("5");
 	setstr2(str, node->uid, col[1] + 2);
+	ft_putendl("6");
 	setstr2(str, node->grid, col[2] + 4);
+	ft_putendl("7");
 	setstr(str, node->size, col[4] + 6);
+	ft_putendl("8");
 	setstr(str, node->month_day, col[5] + 7);
+	ft_putendl("9");
 	setstr(str, node->hour_year, col[6] + 8);
+	ft_putendl("0");
 	return (str);
 }
 
