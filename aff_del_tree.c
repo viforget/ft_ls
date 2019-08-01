@@ -6,14 +6,14 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 18:57:51 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/01 16:46:17 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 #define _6MONTHS 15552000
 
-void		del_tree(t_info *tree)
+void			del_tree(t_info *tree)
 {
 	if (tree->left != NULL)
 		del_tree(tree->left);
@@ -41,28 +41,9 @@ static void		aff_l(t_info *tree, size_t col[7])
 	str = string_l(col, tree);
 	ft_putstr(str);
 	ft_strdel(&str);
-	/*if (tree->size != NULL)
-		put_mult_str(14,
-			tree->ftr, " ",
-			tree->links, " ",
-			tree->uid, " ",
-			tree->grid, " ",
-			tree->size, " ",
-			tree->month_day, " ",
-			tree->hour_year, " ");
-	else
-		put_mult_str(16,
-			tree->ftr, " ",
-			tree->links, " ",
-			tree->uid, " ",
-			tree->grid, " ",
-			tree->min, ", ",
-			tree->maj, " ",
-			tree->month_day, " ",
-			tree->hour_year, " ");*/
 }
 
-void		aff_tree(t_info *tree, size_t col[7])
+void			aff_tree(t_info *tree, size_t col[7])
 {
 	if (tree->left != NULL)
 		aff_tree(tree->left, col);
