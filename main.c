@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 22:16:18 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/01 15:15:50 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,19 @@ static void		sort_arg(char **argv, int argc)
 	i = 0;
 	while (i < argc)
 	{
-		printf("argv[%d] == %s\n", i, argv[i]);
 		if (argv[i][0] == '\0')
 			return (ft_putendl("ft_ls: fts_open: No such file or directory"));
-		printf("argv[%d] == %s\n", i, argv[i]);
-		if (compare(argv[i], argv[i + 1]) > 0 && is_off(g_flags, OPT_R))
+		if (argv[i + 1]
+			&& compare(argv[i], argv[i + 1]) > 0
+			&& is_off(g_flags, OPT_R))
 		{
 			ft_strswap(&argv[i], &argv[i + 1]);
 			i = 0;
 			continue ;
 		}
-		else if (r_compare(argv[i], argv[i + 1]) > 0 && is_on(g_flags, OPT_R))
+		else if (argv[i + 1]
+			&& r_compare(argv[i], argv[i + 1]) > 0
+			&& is_on(g_flags, OPT_R))
 		{
 			ft_strswap(&argv[i], &argv[i + 1]);
 			i = 0;
@@ -126,7 +128,7 @@ static void		ft_multi_ls(char **argv, int argc)
 
 	i = 0;
 	sort_arg(argv, argc);
-	while(i < argc)
+	while (i < argc)
 	{
 		ft_ls(argv[i], argv[i]);
 		i++;
