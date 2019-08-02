@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/01 16:44:59 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/02 15:14:42 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,7 @@ typedef struct		s_info
 	char			*links;
 	char			*uid;
 	char			*grid;
-	char			*size;
-	char			*maj;
-	char			*min;
+	char			*size_majmin;
 	char			*month_day;
 	char			*hour_year;
 	struct s_info	*left;

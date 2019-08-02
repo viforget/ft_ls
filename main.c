@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/01 15:15:50 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/02 15:11:55 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ static void		sort_arg(char **argv, int argc)
 			i = 0;
 			continue ;
 		}
-		printf("argv[%d] == %s\n", i, argv[i]);
 		i++;
 	}
 }
@@ -142,7 +141,6 @@ int				main(int argc, char **argv)
 
 	g_flags = 0;
 	i = parsing(argv);
-	printf("(argv + %d)[3] == %s\n", i, (argv + i)[3]);
 	if (i == argc)
 		ft_ls(".", ".");
 	else

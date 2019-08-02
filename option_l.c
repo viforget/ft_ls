@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/01 15:16:05 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/02 15:14:53 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,32 @@ char		*file_type(int value)
 	return (ftr);
 }
 
+char	*majmin(dev_t rdev)
+{
+	char	*str;
+	char	*tp;
+	int		i;
+	int		j;
+
+	str = (char *)malloc(sizeof(char) * 8);
+	str = ft_memset(str, ' ', 8);
+	tp = ft_itoa(major(rdev));
+	i = ft_strlen(tp) - 1;
+	j = 1;
+	while (i >= 0)
+		str[j--] = tp[i--];
+	ft_strdel(&tp);
+	tp = ft_itoa(minor(rdev));
+	i = ft_strlen(tp) - 1;
+	j = 6;
+	while (i >= 0)
+		str[j--] = tp[i--];
+	str[2] = ',';
+	str[7] = '\0';
+	ft_strdel(&tp);
+	return (str);
+}
+
 void		stock_l(t_info *node)
 {
 	char *tmp;
@@ -94,12 +120,9 @@ void		stock_l(t_info *node)
 	else
 		node->grid = ft_strdup(getgrgid(node->stats.st_gid)->gr_name);
 	if (node->ftr[0] != 'c' && node->ftr[0] != 'b')
-		node->size = ft_itoa(node->stats.st_size);
+		node->size_majmin = ft_itoa(node->stats.st_size);
 	else
-	{
-		node->maj = ft_itoa(major(node->stats.st_rdev));
-		node->min = ft_itoa(minor(node->stats.st_rdev));
-	}
+		node->size_majmin = majmin(node->stats.st_rdev);
 	tmp = ctime(&node->stats.st_mtime);
 	tmp[10] = '\0';
 	tmp[16] = '\0';
