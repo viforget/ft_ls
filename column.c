@@ -6,24 +6,11 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 19:40:59 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/02 15:15:16 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/02 15:42:27 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-
-/*
-void	init_null(size_t col[7])
-{
-	int i;
-
-	i = 1;
-	while (i < 7)
-	{
-		col[i++] = 0;
-	}
-}
-*/
 
 void	setstr(char *bstr, char *str, int nbr)
 {
@@ -57,7 +44,6 @@ char 	*string_l(size_t col[7], t_info *node)
 {
 	char	*str;
 
-	//ft_putnbr(col[6]);
 	str = (char *)ft_memalloc(col[6] + 10);
 	str = ft_memset(str, 32, col[6] + 9);
 	setstr(str, node->ftr, col[0]);

@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/01 18:00:33 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:42:32 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path
 	struct stat		buf;
 	char			*str;
 
-	str = ft_strjoin(path, "/");
+	if (path[0] != '/' || path[1] != '\0')
+		str = ft_strjoin(path, "/");
+	else
+		str = ft_strdup(path);
 	noeud = ft_memalloc(sizeof(t_info));
 	noeud->name = ft_strdup(file->d_name);
 	noeud->path = ft_strjoin(str, noeud->name);
@@ -72,7 +75,6 @@ t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7])
 	while(i < 7)
 		col[i++] = 0;
 	col [0] = 11;
-	//init_null(col);
 	tree = NULL;
 	file = NULL;
 	dirr = readdir(rep);

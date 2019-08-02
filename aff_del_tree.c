@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/01 17:58:59 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/02 15:42:38 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,6 @@ static void		aff_l(t_info *tree, size_t col[7])
 	str = string_l(col, tree);
 	ft_putstr(str);
 	ft_strdel(&str);
-	/*if (tree->size != NULL)
-		put_mult_str(14,
-			tree->ftr, " ",
-			tree->links, " ",
-			tree->uid, " ",
-			tree->grid, " ",
-			tree->size, " ",
-			tree->month_day, " ",
-			tree->hour_year, " ");
-	else
-		put_mult_str(16,
-			tree->ftr, " ",
-			tree->links, " ",
-			tree->uid, " ",
-			tree->grid, " ",
-			tree->min, ", ",
-			tree->maj, " ",
-			tree->month_day, " ",
-			tree->hour_year, " ");*/
 }
 
 void		aff_tree(t_info *tree, size_t col[7])
