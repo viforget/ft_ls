@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/02 16:22:27 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/02 17:04:49 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,9 @@ void				stock_l(t_info *noeud);
 ** BINARY_TREE.C
 */
 
-t_info				*create_tree(DIR *rep, char *path, unsigned int *blocks,
-	size_t col[7]);
+t_info				*bin_stock(t_info *tree, t_info *file);
+t_info				*noeud_stock(t_info *noeud, char *d_name, char *path, unsigned int *blocks);
+t_info				*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7]);
 void				del_tree(t_info *tree);
 
 /*

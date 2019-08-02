@@ -6,13 +6,13 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/02 16:22:49 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/02 17:02:21 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path
+t_info		*noeud_stock(t_info *noeud, char *d_name, char *path
 	, unsigned int *blocks)
 {
 	struct stat		buf;
@@ -23,7 +23,7 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path
 	else
 		str = ft_strdup(path);
 	noeud = ft_memalloc(sizeof(t_info));
-	noeud->name = ft_strdup(file->d_name);
+	noeud->name = ft_strdup(d_name);
 	noeud->path = ft_strjoin(str, noeud->name);
 	ft_strdel(&str);
 	noeud->status = lstat(noeud->path, &(buf));
@@ -31,7 +31,7 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path
 	if (is_on(g_flags, OPT_L))
 		stock_l(noeud);
 	if (is_on(g_flags, OPT_L)
-		&& (is_on(g_flags, OPT_A) || file->d_name[0] != '.'))
+		&& (is_on(g_flags, OPT_A) || d_name[0] != '.'))
 		*blocks += buf.st_blocks;
 	noeud->left = NULL;
 	noeud->right = NULL;
@@ -63,7 +63,8 @@ t_info		*bin_stock(t_info *tree, t_info *file)
 	return (tree);
 }
 
-t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7])
+t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks
+	, size_t col[7])
 {
 	struct dirent	*dirr;
 	t_info			*tree;
@@ -79,7 +80,7 @@ t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7])
 	dirr = readdir(rep);
 	while (dirr)
 	{
-		file = noeud_stock(tree, dirr, path, blocks);
+		file = noeud_stock(tree, dirr->d_name, path, blocks);
 		cnt_column(file, col);
 		tree = bin_stock(tree, file);
 		dirr = readdir(rep);

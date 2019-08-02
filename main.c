@@ -6,11 +6,81 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/02 15:51:37 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/02 17:29:04 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+void			ft_ls(char *st, char *path)
+{
+	t_info			*tree;
+	DIR				*dir;
+	unsigned int	blocks;
+	size_t			col[7];
+
+	tree = NULL;
+	blocks = 0;
+	dir = opendir(path);
+	if (dir)
+	{
+		tree = create_tree(dir, path, &blocks, col);
+		closedir(dir);
+		if (is_on(g_flags, OPT_L))
+		{
+			ft_putstr("total ");
+			ft_putnbr(blocks);
+			ft_putchar('\n');
+		}
+		aff_tree(tree, col);
+		del_tree(tree);
+	}
+	/*else if (errno == ENOTDIR)
+		ft_putendl(st);
+	else
+	{
+		put_mult_str(3, "ft_ls: ", st, ": No such file or directory\n");
+		return ;
+	}*/
+}
+
+t_info		*create_tree_no_arg(char **argv, unsigned int *blocks
+	, size_t col[7])
+{
+	t_info			*tree;
+	t_info			*file;
+	int				i;
+	DIR				*dir;
+
+	i = 1;
+	while(i < 7)
+		col[i++] = 0;
+	col [0] = 11;
+	tree = NULL;
+	file = NULL;
+	i = 0;
+	while (argv[i])
+	{
+		if ((dir = opendir(argv[i])))
+		{}
+		else if (errno == ENOTDIR)
+		{
+			file = noeud_stock(tree, argv[i], "./", blocks);
+			cnt_column(file, col);
+			tree = bin_stock(tree, file);
+		}
+		else
+			put_mult_str(3, "ft_ls: ", st, ": No such file or directory\n");
+		i++;
+	}
+	i = 1;
+	while(i < 7)
+	{
+		col[i] += col[i - 1];
+		i++;
+	}
+	return (tree);
+}
 
 static int		ft_isdir(char *current)
 {
@@ -86,53 +156,28 @@ static void		sort_arg(char **argv, int argc)
 			i = 0;
 			continue ;
 		}
+		printf("argv[%d] == %s\n", i, argv[i]);
 		i++;
-	}
-}
-
-void			ft_ls(char *st, char *path)
-{
-	t_info			*tree;
-	DIR				*dir;
-	unsigned int	blocks;
-	size_t			col[7];
-
-	tree = NULL;
-	blocks = 0;
-	dir = opendir(path);
-	if (dir)
-	{
-		tree = create_tree(dir, path, &blocks, col);
-		closedir(dir);
-		if (is_on(g_flags, OPT_L))
-		{
-			ft_putstr("total ");
-			ft_putnbr(blocks);
-			ft_putchar('\n');
-		}
-		aff_tree(tree, col);
-		del_tree(tree);
-	}
-	else if (errno == ENOTDIR)
-		ft_putendl(st);
-	else
-	{
-		put_mult_str(3, "ft_ls: ", st, ": No such file or directory\n");
-		return ;
 	}
 }
 
 static void		ft_multi_ls(char **argv, int argc)
 {
-	int			i;
+	size_t			col[7];
+	unsigned int	blocks;
+	t_info			*tree;
 
-	i = 0;
+	blocks = 0;
 	sort_arg(argv, argc);
-	while (i < argc)
+	tree = create_tree_no_arg(argv, &blocks, col);
+	if (is_on(g_flags, OPT_L))
 	{
-		ft_ls(argv[i], argv[i]);
-		i++;
+		ft_putstr("total ");
+		ft_putnbr(blocks);
+		ft_putchar('\n');
 	}
+	aff_tree(tree, col);
+	del_tree(tree);
 }
 
 int				main(int argc, char **argv)
@@ -144,6 +189,8 @@ int				main(int argc, char **argv)
 	if (i == argc)
 		ft_ls(".", ".");
 	else
+	{
 		ft_multi_ls(argv + i, argc - i);
+	}
 	return (0);
 }

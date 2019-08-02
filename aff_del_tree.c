@@ -18,7 +18,7 @@ void		del_tree(t_info *tree)
 	if (tree->left != NULL)
 		del_tree(tree->left);
 	if (is_on(g_flags, OPT_UR) && tree->stats.st_mode >= DIRECTOR
-			&& tree->stats.st_mode < BLOCKSPE 
+			&& tree->stats.st_mode < BLOCKSPE
 			&& ft_strcmp(tree->name, ".") != 0
 			&& ft_strcmp(tree->name, "..") != 0
 			&& (is_on(g_flags, OPT_A) || tree->name[0] != '.'))
