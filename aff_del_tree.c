@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/02 15:42:38 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/02 16:28:09 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void		del_tree(t_info *tree)
 {
 	if (tree->left != NULL)
 		del_tree(tree->left);
-	if (is_on(g_flags, OPT_UR) && tree->type == 4
+	if (is_on(g_flags, OPT_UR) && tree->stats.st_mode >= DIRECTOR
+			&& tree->stats.st_mode < BLOCKSPE 
 			&& ft_strcmp(tree->name, ".") != 0
 			&& ft_strcmp(tree->name, "..") != 0
 			&& (is_on(g_flags, OPT_A) || tree->name[0] != '.'))
