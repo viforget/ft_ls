@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/02 15:42:32 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/02 16:22:49 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_info		*noeud_stock(t_info *noeud, struct dirent *file, char *path
 	noeud->name = ft_strdup(file->d_name);
 	noeud->path = ft_strjoin(str, noeud->name);
 	ft_strdel(&str);
-	noeud->type = file->d_type;
 	noeud->status = lstat(noeud->path, &(buf));
 	noeud->stats = buf;
 	if (is_on(g_flags, OPT_L))
