@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/06 16:25:41 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 16:27:33 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void			ft_ls(char *st, char *path)
 {
-	size_t			col[7];
-	unsigned int	blocks;
 	t_info			*tree;
+	DIR				*dir;
+	unsigned int	blocks;
+	size_t			col[7];
 
+	tree = NULL;
 	blocks = 0;
 	dir = opendir(path);
 	if (dir)
@@ -51,12 +53,9 @@ static void		ft_multi_ls(char **argv, int argc)
 	sort_argv(argv, argc, col);
 	while (i < argc)
 	{
-		ft_putstr("total ");
-		ft_putnbr(blocks);
-		ft_putchar('\n');
+		ft_ls(argv[i], argv[i]);
+		i++;
 	}
-	aff_tree(tree, col);
-	del_tree(tree);
 }
 
 int				main(int argc, char **argv)
@@ -68,8 +67,6 @@ int				main(int argc, char **argv)
 	if (i == argc)
 		ft_ls(".", ".");
 	else
-	{
 		ft_multi_ls(argv + i, argc - i);
-	}
 	return (0);
 }
