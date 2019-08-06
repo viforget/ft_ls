@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/06 16:27:33 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 16:33:18 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void		ft_multi_ls(char **argv, int argc)
 
 	i = 0;
 	sort_argv(argv, argc, col);
+	ft_putendl("A");
 	while (i < argc)
 	{
 		ft_ls(argv[i], argv[i]);
