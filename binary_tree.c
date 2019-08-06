@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/06 16:47:46 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/06 18:24:36 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ static int	compare(t_info *first, t_info *second, char err)
 			return (is_on(g_flags, OPT_R) ? 0 : 1);
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
+	{
+		ft_putnbr(err);
 		return (err == FILES && is_on(g_flags, OPT_R) ? 1 : 0);
+	}
 	return (err == FILES && is_on(g_flags, OPT_R) ? 0 : 1);
 }
 
