@@ -6,13 +6,13 @@
 #    By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/30 16:32:31 by ntom              #+#    #+#              #
-#    Updated: 2019/08/06 17:56:52 by ntom             ###   ########.fr        #
+#    Updated: 2019/08/06 19:13:42 by viforget         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_ls
 CC = gcc
-CFLAGS += -Wall -Wextra -I includes
+CFLAGS += -fsanitize=address -Wall -Wextra -I includes
 LIBDIR = libft
 
 SRC = main.c parsing.c binary_tree.c option_l.c aff_del_tree.c column.c argv_sort.c

@@ -6,11 +6,23 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 19:40:59 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/06 18:26:30 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 20:44:07 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+void	add_column(size_t col[7])
+{
+	int i;
+
+	i = 1;
+	while(i < 7)
+	{
+		col[i] += col[i - 1];
+		i++;
+	}
+}
 
 void	setstr(char *bstr, char *str, int nbr)
 {

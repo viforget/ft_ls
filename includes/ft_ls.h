@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/06 18:27:29 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 19:38:20 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void				aff_tree(t_info *tree, size_t col[7]);
 
 char				*string_l(size_t col[7], t_info *node);
 void				cnt_column(t_info *tree, size_t col[7]);
+void				add_column(size_t col[7]);
 
 /*
 ** ARGV_SORT.C
