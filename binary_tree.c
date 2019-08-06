@@ -6,13 +6,13 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/02 17:02:21 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 16:01:46 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-t_info		*noeud_stock(t_info *noeud, char *d_name, char *path
+t_info		*noeud_stock(t_info *noeud, char *file, char *path
 	, unsigned int *blocks)
 {
 	struct stat		buf;
@@ -23,7 +23,7 @@ t_info		*noeud_stock(t_info *noeud, char *d_name, char *path
 	else
 		str = ft_strdup(path);
 	noeud = ft_memalloc(sizeof(t_info));
-	noeud->name = ft_strdup(d_name);
+	noeud->name = ft_strdup(file);
 	noeud->path = ft_strjoin(str, noeud->name);
 	ft_strdel(&str);
 	noeud->status = lstat(noeud->path, &(buf));
@@ -31,16 +31,16 @@ t_info		*noeud_stock(t_info *noeud, char *d_name, char *path
 	if (is_on(g_flags, OPT_L))
 		stock_l(noeud);
 	if (is_on(g_flags, OPT_L)
-		&& (is_on(g_flags, OPT_A) || d_name[0] != '.'))
+		&& (is_on(g_flags, OPT_A) || file[0] != '.'))
 		*blocks += buf.st_blocks;
 	noeud->left = NULL;
 	noeud->right = NULL;
 	return (noeud);
 }
 
-static int	compare(t_info *first, t_info *second)
+static int	compare(t_info *first, t_info *second, char err)
 {
-	if (is_on(g_flags, OPT_T))
+	if (err == FILES && is_on(g_flags, OPT_T))
 	{
 		if (first->stats.st_mtime > second->stats.st_mtime)
 			return (is_on(g_flags, OPT_R) ? 1 : 0);
@@ -48,18 +48,18 @@ static int	compare(t_info *first, t_info *second)
 			return (is_on(g_flags, OPT_R) ? 0 : 1);
 	}
 	if (ft_strcmp(first->name, second->name) < 0)
-		return (is_on(g_flags, OPT_R) ? 1 : 0);
-	return (is_on(g_flags, OPT_R) ? 0 : 1);
+		return (err == FILES && is_on(g_flags, OPT_R) ? 1 : 0);
+	return (err == FILES && is_on(g_flags, OPT_R) ? 0 : 1);
 }
 
-t_info		*bin_stock(t_info *tree, t_info *file)
+t_info		*bin_stock(t_info *tree, t_info *file, char err)
 {
 	if (tree == NULL)
 		return (file);
-	else if (compare(tree, file))
-		tree->left = bin_stock(tree->left, file);
+	else if (compare(tree, file, FILES))
+		tree->left = bin_stock(tree->left, file, err);
 	else
-		tree->right = bin_stock(tree->right, file);
+		tree->right = bin_stock(tree->right, file, err);
 	return (tree);
 }
 
@@ -82,7 +82,7 @@ t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks
 	{
 		file = noeud_stock(tree, dirr->d_name, path, blocks);
 		cnt_column(file, col);
-		tree = bin_stock(tree, file);
+		tree = bin_stock(tree, file, FILES);
 		dirr = readdir(rep);
 	}
 	i = 1;

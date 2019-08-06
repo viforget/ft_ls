@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/02 17:04:49 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 15:46:23 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@
 # define BLOCKSPE 24576
 # define DIRECTOR 16384
 # define CHARSPE 8192
+
+/*
+** OTHER MACROS
+*/
+
+# define FILES 0
+# define ERRORS 1
 
 /*
 ** GLOBAL
@@ -105,10 +112,10 @@ void				stock_l(t_info *noeud);
 ** BINARY_TREE.C
 */
 
-t_info				*bin_stock(t_info *tree, t_info *file);
-t_info				*noeud_stock(t_info *noeud, char *d_name, char *path, unsigned int *blocks);
-t_info				*create_tree(DIR *rep, char *path, unsigned int *blocks, size_t col[7]);
-void				del_tree(t_info *tree);
+t_info				*create_tree(DIR *rep, char *path, unsigned int *blocks,
+	size_t col[7]);
+t_info				*bin_stock(t_info *tree, t_info *file, char err);
+t_info				*noeud_stock(t_info *noeud, char *file, char *path, unsigned int *blocks);
 
 /*
 ** AFF_DEL_TREE.C
@@ -123,5 +130,11 @@ void				aff_tree(t_info *tree, size_t col[7]);
 
 char				*string_l(size_t col[7], t_info *node);
 void				cnt_column(t_info *tree, size_t col[7]);
+
+/*
+** ARGV_SORT.C
+*/
+
+void 				sort_argv(char **argv, int argc, size_t col[7]);
 
 #endif
