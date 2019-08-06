@@ -6,13 +6,13 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/02 15:51:37 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:03:57 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static int		ft_isdir(char *current)
+/*static int		ft_isdir(char *current)
 {
 	struct stat		buf;
 
@@ -89,7 +89,7 @@ static void		sort_arg(char **argv, int argc)
 		i++;
 	}
 }
-
+*/
 void			ft_ls(char *st, char *path)
 {
 	t_info			*tree;
@@ -125,9 +125,10 @@ void			ft_ls(char *st, char *path)
 static void		ft_multi_ls(char **argv, int argc)
 {
 	int			i;
+	size_t		col[7];
 
 	i = 0;
-	sort_arg(argv, argc);
+	sort_argv(argv, argc, col);
 	while (i < argc)
 	{
 		ft_ls(argv[i], argv[i]);
