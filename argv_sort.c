@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/06 16:46:39 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/06 18:26:45 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	sort_argv(char **argv, int argc, size_t col[7])
 {
-	int 	i;
+	int		i;
 	DIR		*buf;
 	t_info	*tmp;
 	t_info	*tre[3];

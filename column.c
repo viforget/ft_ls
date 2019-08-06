@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 19:40:59 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/02 15:42:27 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 18:26:30 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	setstr2(char *bstr, char *str, int nbr)
 	}
 }
 
-char 	*string_l(size_t col[7], t_info *node)
+char	*string_l(size_t col[7], t_info *node)
 {
 	char	*str;
 

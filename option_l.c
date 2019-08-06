@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/02 15:14:53 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/06 18:25:24 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char		*file_type(int value)
 	return (ftr);
 }
 
-char	*majmin(dev_t rdev)
+char		*majmin(dev_t rdev)
 {
 	char	*str;
 	char	*tp;
@@ -108,7 +108,7 @@ void		stock_l(t_info *node)
 	char *tmp;
 
 	tmp = NULL;
-	node->ftr = ft_strdup(file_type(node->stats.st_mode));
+	node->ftr = file_type(node->stats.st_mode);
 	node->ftr = ft_strjoindel(node->ftr, ft_xattr(node->path));
 	node->links = ft_itoa(node->stats.st_nlink);
 	if (getpwuid(node->stats.st_uid) == NULL)
