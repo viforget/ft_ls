@@ -6,13 +6,13 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/06 20:42:52 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/06 20:48:37 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void	aff_error(t_info *tree)
+void			aff_error(t_info *tree)
 {
 	if (tree == NULL)
 		return ;
@@ -24,7 +24,21 @@ void	aff_error(t_info *tree)
 		aff_error(tree->right);
 }
 
-void	sort_argv(char **argv, int argc, size_t col[7])
+static void 	initialize(t_info *tre[3], size_t col[7])
+{
+	tre[0] = NULL;	
+	tre[1] = NULL;	
+	tre[2] = NULL;
+	col[0] = 11;
+	col[1] = 0;
+	col[2] = 0;
+	col[3] = 0;
+	col[4] = 0;
+	col[5] = 0;
+	col[6] = 0;
+}
+
+void			sort_argv(char **argv, int argc, size_t col[7])
 {
 	int					i;
 	DIR					*buf;
@@ -34,20 +48,8 @@ void	sort_argv(char **argv, int argc, size_t col[7])
 
 	i = 0;
 	tmp = NULL;
-	tre[0] = NULL;
-	tre[1] = NULL;
-	tre[2] = NULL;
 	blocks = 0;
-	col[0] = 11;
-	col[4] = 0;
-	col[5] = 0;
-			/*printf("%zu\n", col[0]);
-			printf("%zu\n", col[1]);
-			printf("%zu\n", col[2]);
-			printf("%zu\n", col[3]);
-			printf("%zu\n", col[4]);
-			printf("%zu\n", col[5]);
-			printf("%zu\n", col[6]);*/
+	initialize(tre, col);
 	while (i < argc)
 	{
 		if (argv[i][0] == '\0')
@@ -61,13 +63,6 @@ void	sort_argv(char **argv, int argc, size_t col[7])
 		else if (errno == ENOTDIR)
 		{
 			cnt_column(tmp, col);
-			/*printf("%zu\n", col[0]);
-			printf("%zu\n", col[1]);
-			printf("%zu\n", col[2]);
-			printf("%zu\n", col[3]);
-			printf("%zu\n", col[4]);
-			printf("%zu\n", col[5]);
-			printf("%zu\n", col[6]);*/
 			tre[1] = bin_stock(tre[1], tmp, FILES);
 		}
 		else
