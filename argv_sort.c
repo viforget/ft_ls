@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 16:35:02 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 17:45:54 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void			tree_dir(t_info *tree)
 		return ;
 	if (boo2 == 0 && tree->left == NULL && tree->right == NULL)
 	{
-		ft_ls(tree->name, "./");
+		ft_ls(tree->name, tree->name);
 		return ;
 	}
 	else
@@ -45,13 +45,13 @@ void			tree_dir(t_info *tree)
 		if (boo == 0)
 		{
 			put_mult_str(2, tree->name, ":\n");
-			ft_ls(tree->name, "./");
+			ft_ls(tree->name, tree->name);
 			boo = 1;
 		}
 		else
 		{
 			put_mult_str(3, "\n", tree->name, ":\n");
-			ft_ls(tree->name, "./");
+			ft_ls(tree->name, tree->name);
 		}
 	}
 	if (tree->right != NULL)
