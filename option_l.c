@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/06 18:25:24 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 16:04:09 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,17 @@ char		*majmin(dev_t rdev)
 	return (str);
 }
 
+char		*set_zero(char **tmp)
+{
+	char *str;
+
+	*tmp[10] = '\0';
+	*tmp[16] = '\0';
+	str = ft_strdup(*tmp + 4);
+	*tmp[24] = '\0';
+	return (str);
+}
+
 void		stock_l(t_info *node)
 {
 	char *tmp;
@@ -124,10 +135,7 @@ void		stock_l(t_info *node)
 	else
 		node->size_majmin = majmin(node->stats.st_rdev);
 	tmp = ctime(&node->stats.st_mtime);
-	tmp[10] = '\0';
-	tmp[16] = '\0';
-	node->month_day = ft_strdup(tmp + 4);
-	tmp[24] = '\0';
+	node->month_day = set_zero(&tmp);
 	if (time(NULL) < node->stats.st_mtime
 		|| time(NULL) - node->stats.st_mtime > _6MONTHS)
 		node->hour_year = ft_strdup(tmp + 20);
