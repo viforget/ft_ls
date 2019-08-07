@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 18:19:14 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 18:30:52 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ static void		tree_dir2(t_info *tree)
 	}
 }
 
-void			tree_dir(t_info *tree)
+void			tree_dir(t_info *tree, int argc)
 {
 	static int boo = 0;
 
 	if (tree == NULL)
 		return ;
-	if (boo == 0 && tree->left == NULL && tree->right == NULL)
+	if (argc == 1)
 	{
 		ft_ls(tree->name);
 		return ;
@@ -55,11 +55,11 @@ void			tree_dir(t_info *tree)
 	else
 		boo = 1;
 	if (tree->left != NULL)
-		tree_dir(tree->left);
+		tree_dir(tree->left, argc);
 	if (tree->name[0] != '\0')
 		tree_dir2(tree);
 	if (tree->right != NULL)
-		tree_dir(tree->right);
+		tree_dir(tree->right, argc);
 }
 
 static void		initialize(t_info *tre[3], size_t col[7],
@@ -117,5 +117,5 @@ void			sort_argv(char **argv, int argc, size_t col[7])
 	aff_error(tre[2]);
 	if (tre[1] != NULL)
 		aff_tree(tre[1], col);
-	tree_dir(tre[0]);
+	tree_dir(tre[0], argc);
 }
