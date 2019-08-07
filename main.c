@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 18:01:59 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 19:02:36 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int				main(int argc, char **argv)
 
 	g_flags = 0;
 	i = parsing(argv);
-	printf("g_flags = %d\n", g_flags);
 	if (i == argc)
 		ft_ls(".");
 	else

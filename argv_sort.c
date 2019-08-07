@@ -6,25 +6,13 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 18:30:52 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 18:57:15 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-void			aff_error(t_info *tree)
-{
-	if (tree == NULL)
-		return ;
-	if (tree->left != NULL)
-		aff_error(tree->left);
-	if (tree->name[0] != '\0')
-		put_mult_str(3, "ft_ls: ", tree->name, ": No such file or directory\n");
-	if (tree->right != NULL)
-		aff_error(tree->right);
-}
-
-static void		tree_dir2(t_info *tree)
+static void			tree_dir2(t_info *tree)
 {
 	static int boo = 0;
 
@@ -41,7 +29,7 @@ static void		tree_dir2(t_info *tree)
 	}
 }
 
-void			tree_dir(t_info *tree, int argc)
+void				tree_dir(t_info *tree, int argc)
 {
 	static int boo = 0;
 
@@ -62,7 +50,7 @@ void			tree_dir(t_info *tree, int argc)
 		tree_dir(tree->right, argc);
 }
 
-static void		initialize(t_info *tre[3], size_t col[7],
+static void			initialize(t_info *tre[3], size_t col[7],
 	unsigned int *blocks, int *i)
 {
 	tre[0] = NULL;
@@ -79,15 +67,37 @@ static void		initialize(t_info *tre[3], size_t col[7],
 	*blocks = 0;
 }
 
-void			sort_argv2(/* arguments */)
+static unsigned int	sort_argv2(char *argv, t_info *tmp, t_info *tre[3],
+	size_t *col[7])
 {
-	/* code */
+	unsigned int		blocks;
+	DIR					*buf;
+
+	blocks = 0;
+	if (argv[0] == '\0')
+	{
+		ft_putendl("ft_ls: fts_open: No such file or directory");
+		return (0);
+	}
+	tmp = noeud_stock(tmp, argv, "./", &blocks);
+	if ((buf = opendir(argv)))
+	{
+		tre[0] = bin_stock(tre[0], tmp, FILES);
+		closedir(buf);
+	}
+	else if (errno == ENOTDIR)
+	{
+		cnt_column(tmp, *col);
+		tre[1] = bin_stock(tre[1], tmp, FILES);
+	}
+	else
+		tre[2] = bin_stock(tre[2], tmp, ERRORS);
+	return (blocks);
 }
 
-void			sort_argv(char **argv, int argc, size_t col[7])
+void				sort_argv(char **argv, int argc, size_t col[7])
 {
 	int					i;
-	DIR					*buf;
 	t_info				*tmp;
 	t_info				*tre[3];
 	unsigned int		blocks;
@@ -96,21 +106,7 @@ void			sort_argv(char **argv, int argc, size_t col[7])
 	initialize(tre, col, &blocks, &i);
 	while (i < argc)
 	{
-		if (argv[i][0] == '\0')
-			return (ft_putendl("ft_ls: fts_open: No such file or directory"));
-		tmp = noeud_stock(tmp, argv[i], "./", &blocks);
-		if ((buf = opendir(argv[i])))
-		{
-			tre[0] = bin_stock(tre[0], tmp, FILES);
-			closedir(buf);
-		}
-		else if (errno == ENOTDIR)
-		{
-			cnt_column(tmp, col);
-			tre[1] = bin_stock(tre[1], tmp, FILES);
-		}
-		else
-			tre[2] = bin_stock(tre[2], tmp, ERRORS);
+		sort_argv2(argv[i], tmp, tre, &col);
 		i++;
 	}
 	add_column(col);

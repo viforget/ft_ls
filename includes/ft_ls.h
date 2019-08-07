@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 18:01:50 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 18:57:05 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,18 @@ void				add_column(size_t col[7]);
 */
 
 void				sort_argv(char **argv, int argc, size_t col[7]);
+
+/*
+** XATTR_RIGHTS.C
+*/
+
+void				rights(int value, char ftr[12]);
+char				*ft_xattr(char *path);
+
+/*
+** AFF_ERROR_SORT.C
+*/
+
+void				aff_error(t_info *tree);
 
 #endif
