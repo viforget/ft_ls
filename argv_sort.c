@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 17:45:54 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:23:41 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void			aff_error(t_info *tree)
 		aff_error(tree->right);
 }
 
-void			tree_dir(t_info *tree)
+void			tree_dir(t_info *tree, int argc)
 {
 	static int boo = 0;
 	static int boo2 = 0;
 
 	if (tree == NULL)
 		return ;
-	if (boo2 == 0 && tree->left == NULL && tree->right == NULL)
+	if (argc == 1)
 	{
 		ft_ls(tree->name, tree->name);
 		return ;
@@ -39,7 +39,7 @@ void			tree_dir(t_info *tree)
 	else
 		boo2 = 1;
 	if (tree->left != NULL)
-		tree_dir(tree->left);
+		tree_dir(tree->left, argc);
 	if (tree->name[0] != '\0')
 	{
 		if (boo == 0)
@@ -55,7 +55,7 @@ void			tree_dir(t_info *tree)
 		}
 	}
 	if (tree->right != NULL)
-		tree_dir(tree->right);
+		tree_dir(tree->right, argc);
 }
 
 static void		initialize(t_info *tre[3], size_t col[7])
@@ -107,5 +107,5 @@ void			sort_argv(char **argv, int argc, size_t col[7])
 	aff_error(tre[2]);
 	if (tre[1] != NULL)
 		aff_tree(tre[1], col);
-	tree_dir(tre[0]);
+	tree_dir(tre[0], argc);
 }
