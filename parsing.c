@@ -6,21 +6,16 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 19:35:42 by ntom              #+#    #+#             */
-/*   Updated: 2019/07/31 22:05:50 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 16:33:48 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static int		ft_option(char *str)
+static int		ft_option(char *str, int j, int i, char *error)
 {
 	static char		*flag = "lRart";
-	size_t			i;
-	size_t			j;
-	char			error[2];
 
-	j = 1;
-	error[1] = '\0';
 	while (str[j])
 	{
 		i = 0;
@@ -44,6 +39,18 @@ static int		ft_option(char *str)
 	return (0);
 }
 
+static int		init_option(char *str)
+{
+	size_t			i;
+	size_t			j;
+	char			error[2];
+
+	j = 1;
+	error[1] = '\0';
+	i = 0;
+	return (ft_option(str, j, i, error));
+}
+
 int				parsing(char **argv)
 {
 	size_t			i;
@@ -59,7 +66,7 @@ int				parsing(char **argv)
 			break ;
 		}
 		if (argv[i][0] == '-')
-			ft_option(argv[i]);
+			init_option(argv[i]);
 		i++;
 	}
 	return (i);

@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/06 21:18:15 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:35:02 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,15 @@ void			tree_dir(t_info *tree)
 			put_mult_str(3, "\n", tree->name, ":\n");
 			ft_ls(tree->name, "./");
 		}
-
 	}
 	if (tree->right != NULL)
 		tree_dir(tree->right);
 }
 
-static void 	initialize(t_info *tre[3], size_t col[7])
+static void		initialize(t_info *tre[3], size_t col[7])
 {
-	tre[0] = NULL;	
-	tre[1] = NULL;	
+	tre[0] = NULL;
+	tre[1] = NULL;
 	tre[2] = NULL;
 	col[0] = 11;
 	col[1] = 0;
@@ -88,7 +87,7 @@ void			sort_argv(char **argv, int argc, size_t col[7])
 	while (i < argc)
 	{
 		if (argv[i][0] == '\0')
-			return (ft_putendl("ft_ls: fts_open: No such file or directory"));	
+			return (ft_putendl("ft_ls: fts_open: No such file or directory"));
 		tmp = noeud_stock(tmp, argv[i], "./", &blocks);
 		if ((buf = opendir(argv[i])))
 		{
