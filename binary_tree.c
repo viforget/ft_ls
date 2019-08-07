@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/06 19:36:46 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:03:53 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,5 @@ t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks
 	}
 	i = 1;
 	add_column(col);
-//	while (i < 7)
-//	{
-//		col[i] += col[i - 1];
-//		i++;
-//	}
 	return (tree);
 }

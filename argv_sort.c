@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 17:45:54 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:19:14 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,41 +24,46 @@ void			aff_error(t_info *tree)
 		aff_error(tree->right);
 }
 
+static void		tree_dir2(t_info *tree)
+{
+	static int boo = 0;
+
+	if (boo == 0)
+	{
+		put_mult_str(2, tree->name, ":\n");
+		ft_ls(tree->name);
+		boo = 1;
+	}
+	else
+	{
+		put_mult_str(3, "\n", tree->name, ":\n");
+		ft_ls(tree->name);
+	}
+}
+
 void			tree_dir(t_info *tree)
 {
 	static int boo = 0;
-	static int boo2 = 0;
 
 	if (tree == NULL)
 		return ;
-	if (boo2 == 0 && tree->left == NULL && tree->right == NULL)
+	if (boo == 0 && tree->left == NULL && tree->right == NULL)
 	{
-		ft_ls(tree->name, tree->name);
+		ft_ls(tree->name);
 		return ;
 	}
 	else
-		boo2 = 1;
+		boo = 1;
 	if (tree->left != NULL)
 		tree_dir(tree->left);
 	if (tree->name[0] != '\0')
-	{
-		if (boo == 0)
-		{
-			put_mult_str(2, tree->name, ":\n");
-			ft_ls(tree->name, tree->name);
-			boo = 1;
-		}
-		else
-		{
-			put_mult_str(3, "\n", tree->name, ":\n");
-			ft_ls(tree->name, tree->name);
-		}
-	}
+		tree_dir2(tree);
 	if (tree->right != NULL)
 		tree_dir(tree->right);
 }
 
-static void		initialize(t_info *tre[3], size_t col[7])
+static void		initialize(t_info *tre[3], size_t col[7],
+	unsigned int *blocks, int *i)
 {
 	tre[0] = NULL;
 	tre[1] = NULL;
@@ -70,6 +75,13 @@ static void		initialize(t_info *tre[3], size_t col[7])
 	col[4] = 0;
 	col[5] = 0;
 	col[6] = 0;
+	*i = 0;
+	*blocks = 0;
+}
+
+void			sort_argv2(/* arguments */)
+{
+	/* code */
 }
 
 void			sort_argv(char **argv, int argc, size_t col[7])
@@ -80,10 +92,8 @@ void			sort_argv(char **argv, int argc, size_t col[7])
 	t_info				*tre[3];
 	unsigned int		blocks;
 
-	i = 0;
 	tmp = NULL;
-	blocks = 0;
-	initialize(tre, col);
+	initialize(tre, col, &blocks, &i);
 	while (i < argc)
 	{
 		if (argv[i][0] == '\0')

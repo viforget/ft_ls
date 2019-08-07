@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/06 19:38:20 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 18:01:50 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct		s_info
 ** MAIN.C
 */
 
-void				ft_ls(char *st, char *path);
+void				ft_ls(char *path);
 
 /*
 ** PARSING.C

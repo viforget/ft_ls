@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/06 18:28:17 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/07 18:02:13 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void			del_tree(t_info *tree)
 	{
 		put_mult_str(4, "\n", tree->path, ":", "\n");
 		put_mult_str(3, tree->name, tree->path, "\n");
-		ft_ls(tree->name, tree->path);
+		ft_ls(tree->name);
 	}
 	if (tree->right != NULL)
 		del_tree(tree->right);
