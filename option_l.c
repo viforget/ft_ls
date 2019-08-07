@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 16:04:09 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 16:54:31 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,22 +103,8 @@ char		*majmin(dev_t rdev)
 	return (str);
 }
 
-char		*set_zero(char **tmp)
+static void	option_l2(t_info *node)
 {
-	char *str;
-
-	*tmp[10] = '\0';
-	*tmp[16] = '\0';
-	str = ft_strdup(*tmp + 4);
-	*tmp[24] = '\0';
-	return (str);
-}
-
-void		stock_l(t_info *node)
-{
-	char *tmp;
-
-	tmp = NULL;
 	node->ftr = file_type(node->stats.st_mode);
 	node->ftr = ft_strjoindel(node->ftr, ft_xattr(node->path));
 	node->links = ft_itoa(node->stats.st_nlink);
@@ -134,8 +120,19 @@ void		stock_l(t_info *node)
 		node->size_majmin = ft_itoa(node->stats.st_size);
 	else
 		node->size_majmin = majmin(node->stats.st_rdev);
+}
+
+void		stock_l(t_info *node)
+{
+	char *tmp;
+
+	tmp = NULL;
+	option_l2(node);
 	tmp = ctime(&node->stats.st_mtime);
-	node->month_day = set_zero(&tmp);
+	tmp[10] = '\0';
+	tmp[16] = '\0';
+	node->month_day = ft_strdup(tmp + 4);
+	tmp[24] = '\0';
 	if (time(NULL) < node->stats.st_mtime
 		|| time(NULL) - node->stats.st_mtime > _6MONTHS)
 		node->hour_year = ft_strdup(tmp + 20);

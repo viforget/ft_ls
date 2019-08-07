@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 15:36:50 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/07 17:06:38 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,6 @@ static void		ft_multi_ls(char **argv, int argc)
 
 	i = 0;
 	sort_argv(argv, argc, col);
-	/*while (i < argc)
-	{
-		ft_ls(argv[i], argv[i]);
-		i++;
-	}*/
 }
 
 int				main(int argc, char **argv)
@@ -57,6 +52,7 @@ int				main(int argc, char **argv)
 
 	g_flags = 0;
 	i = parsing(argv);
+	printf("g_flags = %d\n", g_flags);
 	if (i == argc)
 		ft_ls(".", ".");
 	else
