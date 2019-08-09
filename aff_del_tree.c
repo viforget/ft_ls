@@ -24,8 +24,7 @@ void			del_tree(t_info *tree)
 			&& (is_on(g_flags, OPT_A) || tree->name[0] != '.'))
 	{
 		put_mult_str(4, "\n", tree->path, ":", "\n");
-		put_mult_str(3, tree->name, tree->path, "\n");
-		ft_ls(tree->name);
+		ft_ls(tree->path);
 	}
 	if (tree->right != NULL)
 		del_tree(tree->right);
