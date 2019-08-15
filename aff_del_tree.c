@@ -6,15 +6,16 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/15 18:22:54 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/15 23:27:35 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
-#define _6MONTHS 15552000
 
 void			del_tree(t_info *tree)
 {
+	if (tree == NULL)
+		return ;
 	if (tree->left != NULL)
 		del_tree(tree->left);
 	if (is_on(g_flags, OPT_UR) && tree->stats.st_mode >= DIRECTOR
