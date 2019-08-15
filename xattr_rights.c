@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 18:50:23 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 18:50:46 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/16 00:17:14 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ char		*ft_xattr(char *path)
 	ssize_t	tmp;
 	acl_t	acl;
 
-	if ((acl = acl_get_file(path, ACL_TYPE_EXTENDED)) != (acl_t)NULL)
+	if ((tmp = listxattr(path, NULL, 0, XATTR_NOFOLLOW)) > 0)
+		return ("@");
+	else if ((acl = acl_get_file(path, ACL_TYPE_EXTENDED)) != (acl_t)NULL)
 	{
 		acl_free((void*)acl);
 		return ("+");
 	}
-	else if ((tmp = listxattr(path, NULL, 0, XATTR_NOFOLLOW)) > 0)
-		return ("@");
 	return (" ");
 }
 
