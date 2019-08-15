@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/15 18:54:48 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/15 20:04:15 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,7 @@ void				sort_argv(char **argv, int argc, size_t col[7])
 			ft_putchar('\n');
 	}
 	tree_dir(tre[0], argc);
+	del_tree(tre[0]);
+	del_tree(tre[1]);
+	del_tree(tre[2]);
 }
