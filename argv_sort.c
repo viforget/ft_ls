@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 18:57:15 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/15 16:58:08 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static unsigned int	sort_argv2(char *argv, t_info *tmp, t_info *tre[3],
 		ft_putendl("ft_ls: fts_open: No such file or directory");
 		return (0);
 	}
-	tmp = noeud_stock(tmp, argv, "./", &blocks);
+	tmp = noeud_stock(tmp, argv, "", &blocks);
 	if ((buf = opendir(argv)))
 	{
 		tre[0] = bin_stock(tre[0], tmp, FILES);
