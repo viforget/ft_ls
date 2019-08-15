@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 19:35:42 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 16:33:48 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/15 15:19:49 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ static int		ft_option(char *str, int j, int i, char *error)
 			if (flag[i] == '\0')
 			{
 				error[0] = str[j];
-				return (put_mult_str(3, "ft_ls: illegal option -- ",
-				error, "\nusage: ft_ls [-Ralrt] [file ...]"));
+				put_mult_str(3, "ft_ls: illegal option -- ",
+				error, "\nusage: ft_ls [-Ralrt] [file ...]\n");
+				exit(1);
 			}
 		}
 		j++;

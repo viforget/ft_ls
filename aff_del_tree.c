@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 18:02:13 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/15 16:34:35 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,18 @@ void			del_tree(t_info *tree)
 static void		aff_l(t_info *tree, size_t col[7])
 {
 	char	*str;
+	char	buf[NAME_MAX + 1];
 
 	str = string_l(col, tree);
 	ft_putstr(str);
+	if (tree->ftr[0] == 'l')
+	{
+		ft_bzero(buf, NAME_MAX + 1);
+		readlink(tree->path, buf, NAME_MAX);
+		put_mult_str(4, tree->name, " -> ", buf, "\n");
+	}
+	else
+		ft_putendl(tree->name);
 	ft_strdel(&str);
 }
 
@@ -57,7 +66,8 @@ void			aff_tree(t_info *tree, size_t col[7])
 	{
 		if (is_on(g_flags, OPT_L))
 			aff_l(tree, col);
-		ft_putendl(tree->name);
+		else
+			ft_putendl(tree->name);
 	}
 	if (tree->right != NULL)
 		aff_tree(tree->right, col);
