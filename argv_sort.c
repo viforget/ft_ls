@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/15 16:58:08 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/15 18:54:48 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,17 @@ void				sort_argv(char **argv, int argc, size_t col[7])
 	add_column(col);
 	aff_error(tre[2]);
 	if (tre[1] != NULL)
-		aff_tree(tre[1], col);
+	{
+		if (is_off(g_flags, OPT_A))
+		{
+			g_flags |= ON << OPT_A;
+			aff_tree(tre[1], col);
+			g_flags &= ~(ON << OPT_A);
+		}
+		else
+			aff_tree(tre[1], col);
+		if (tre[0] != NULL)
+			ft_putchar('\n');
+	}
 	tree_dir(tre[0], argc);
 }

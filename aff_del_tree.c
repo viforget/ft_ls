@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/30 17:24:49 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/15 16:34:35 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/15 18:22:54 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			aff_tree(t_info *tree, size_t col[7])
 {
 	if (tree->left != NULL)
 		aff_tree(tree->left, col);
-	if (is_on(g_flags, OPT_A) || tree->name[0] != '.')
+	if (is_on(g_flags, OPT_A) || (tree->name[0] != '.'))
 	{
 		if (is_on(g_flags, OPT_L))
 			aff_l(tree, col);
