@@ -6,7 +6,7 @@
 #    By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/30 16:32:31 by ntom              #+#    #+#              #
-#    Updated: 2019/08/17 11:57:17 by viforget         ###   ########.fr        #
+#    Updated: 2019/08/17 15:14:07 by ntom             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS += -Wall -Wextra -I includes
 LIBDIR = libft
 
 SRC = main.c parsing.c binary_tree.c option_l.c aff_del_tree.c column.c \
-		argv_sort.c aff_error_sort.c xattr_rights.c
+		argv_sort.c aff_args.c xattr_rights.c
 
 O_FILES = $(SRC:%.c=%.o)
 FLAGLIB = -L$(LIBDIR) -lft

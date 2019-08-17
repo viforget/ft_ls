@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/15 23:27:01 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/17 15:13:41 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,9 @@
 # define FILES 0
 # define ERRORS 1
 # define _6MONTHS 15552000
+# define TREE_ERRORS 2
+# define TREE_FILES 1
+# define TREE_DIRECTORIES 0
 
 /*
 ** GLOBAL
@@ -148,9 +151,10 @@ void				rights(int value, char ftr[12]);
 char				*ft_xattr(char *path);
 
 /*
-** AFF_ERROR_SORT.C
+** AFF_ARGS.C
 */
 
+void				aff_args(size_t col[7], t_info *files, t_info *directories);
 void				aff_error(t_info *tree);
 
 #endif

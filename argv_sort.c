@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/16 00:44:00 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/17 15:12:25 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,12 @@ void				tree_dir(t_info *tree, int argc)
 		tree_dir(tree->right, argc);
 }
 
-static void			initialize(t_info *tre[3], size_t col[7],
+static void			initialize(t_info *tree[3], size_t col[7],
 	unsigned int *blocks, int *i)
 {
-	tre[0] = NULL;
-	tre[1] = NULL;
-	tre[2] = NULL;
+	tree[TREE_DIRECTORIES] = NULL;
+	tree[TREE_FILES] = NULL;
+	tree[TREE_ERRORS] = NULL;
 	col[0] = 11;
 	col[1] = 0;
 	col[2] = 0;
@@ -67,7 +67,7 @@ static void			initialize(t_info *tre[3], size_t col[7],
 	*blocks = 0;
 }
 
-static unsigned int	sort_argv2(char *argv, t_info *tmp, t_info *tre[3],
+static unsigned int	sort_argv2(char *argv, t_info *tmp, t_info *tree[3],
 	size_t *col[7])
 {
 	unsigned int		blocks;
@@ -82,16 +82,16 @@ static unsigned int	sort_argv2(char *argv, t_info *tmp, t_info *tre[3],
 	tmp = noeud_stock(tmp, argv, "", &blocks);
 	if ((buf = opendir(argv)))
 	{
-		tre[0] = bin_stock(tre[0], tmp, FILES);
+		tree[TREE_DIRECTORIES] = bin_stock(tree[TREE_DIRECTORIES], tmp, FILES);
 		closedir(buf);
 	}
 	else if (errno == ENOTDIR)
 	{
 		cnt_column(tmp, *col);
-		tre[1] = bin_stock(tre[1], tmp, FILES);
+		tree[TREE_FILES] = bin_stock(tree[TREE_FILES], tmp, FILES);
 	}
 	else
-		tre[2] = bin_stock(tre[2], tmp, ERRORS);
+		tree[TREE_ERRORS] = bin_stock(tree[TREE_ERRORS], tmp, ERRORS);
 	return (blocks);
 }
 
@@ -99,33 +99,19 @@ void				sort_argv(char **argv, int argc, size_t col[7])
 {
 	int					i;
 	t_info				*tmp;
-	t_info				*tre[3];
+	t_info				*tree[3];
 	unsigned int		blocks;
 
 	tmp = NULL;
-	initialize(tre, col, &blocks, &i);
+	initialize(tree, col, &blocks, &i);
 	while (i < argc)
-	{
-		sort_argv2(argv[i], tmp, tre, &col);
-		i++;
-	}
+		sort_argv2(argv[i++], tmp, tree, &col);
 	add_column(col);
-	aff_error(tre[2]);
-	if (tre[1] != NULL)
-	{
-		if (is_off(g_flags, OPT_A))
-		{
-			g_flags |= ON << OPT_A;
-			aff_tree(tre[1], col);
-			g_flags &= ~(ON << OPT_A);
-		}
-		else
-			aff_tree(tre[1], col);
-		if (tre[0] != NULL)
-			ft_putchar('\n');
-	}
-	tree_dir(tre[0], argc);
-	del_tree(tre[0]);
-	del_tree(tre[1]);
-	del_tree(tre[2]);
+	aff_error(tree[TREE_ERRORS]);
+	if (tree[TREE_FILES] != NULL)
+		aff_args(col, tree[TREE_FILES], tree[TREE_DIRECTORIES]);
+	tree_dir(tree[TREE_DIRECTORIES], argc);
+	del_tree(tree[TREE_ERRORS]);
+	del_tree(tree[TREE_FILES]);
+	del_tree(tree[TREE_DIRECTORIES]);
 }

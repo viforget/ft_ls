@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/17 14:29:10 by viforget         ###   ########.fr       */
+/*   Updated: 2019/08/17 14:49:42 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int				ft_find_right(t_info *tree)
 {
 	if (is_on(g_flags, OPT_A))
 		return (1);
-	while(tree)
+	while (tree)
 	{
 		if (tree->name[0] != '.')
 			return (1);
