@@ -6,11 +6,24 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/16 00:43:03 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/17 12:13:21 by viforget         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
+
+int				ft_find_right(t_info *tree)
+{
+	if (is_on(g_flags, OPT_A))
+		return (1);
+	while(tree)
+	{
+		if (tree->name[0] != '.')
+			return (1);
+		tree = tree->right;
+	}
+	return (0);
+}
 
 void			ft_ls(char *path)
 {
@@ -26,7 +39,7 @@ void			ft_ls(char *path)
 	{
 		tree = create_tree(dir, path, &blocks, col);
 		closedir(dir);
-		if (is_on(g_flags, OPT_L))
+		if (is_on(g_flags, OPT_L) && ft_find_right(tree))
 		{
 			ft_putstr("total ");
 			ft_putnbr(blocks);
