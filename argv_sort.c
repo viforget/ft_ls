@@ -6,48 +6,48 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/17 15:12:25 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/17 15:26:23 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/ft_ls.h"
 
-static void			tree_dir2(t_info *tree)
+static void			tree_dir2(t_info *directories)
 {
 	static int boo = 0;
 
 	if (boo == 0)
 	{
-		put_mult_str(2, tree->name, ":\n");
-		ft_ls(tree->name);
+		put_mult_str(2, directories->name, ":\n");
+		ft_ls(directories->name);
 		boo = 1;
 	}
 	else
 	{
-		put_mult_str(3, "\n", tree->name, ":\n");
-		ft_ls(tree->name);
+		put_mult_str(3, "\n", directories->name, ":\n");
+		ft_ls(directories->name);
 	}
 }
 
-void				tree_dir(t_info *tree, int argc)
+void				tree_dir(t_info *directories, int argc)
 {
 	static int boo = 0;
 
-	if (tree == NULL)
+	if (directories == NULL)
 		return ;
 	if (argc == 1)
 	{
-		ft_ls(tree->name);
+		ft_ls(directories->name);
 		return ;
 	}
 	else
 		boo = 1;
-	if (tree->left != NULL)
-		tree_dir(tree->left, argc);
-	if (tree->name[0] != '\0')
-		tree_dir2(tree);
-	if (tree->right != NULL)
-		tree_dir(tree->right, argc);
+	if (directories->left != NULL)
+		tree_dir(directories->left, argc);
+	if (directories->name[0] != '\0')
+		tree_dir2(directories);
+	if (directories->right != NULL)
+		tree_dir(directories->right, argc);
 }
 
 static void			initialize(t_info *tree[3], size_t col[7],
