@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/04 17:51:39 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/17 15:26:23 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/17 15:48:34 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void				sort_argv(char **argv, int argc, size_t col[7])
 	if (tree[TREE_FILES] != NULL)
 		aff_args(col, tree[TREE_FILES], tree[TREE_DIRECTORIES]);
 	tree_dir(tree[TREE_DIRECTORIES], argc);
+	aff_tree(tree[TREE_DIRECTORIES], col);
 	del_tree(tree[TREE_ERRORS]);
 	del_tree(tree[TREE_FILES]);
 	del_tree(tree[TREE_DIRECTORIES]);
