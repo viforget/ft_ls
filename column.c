@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 19:40:59 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/07 16:36:04 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/26 15:37:53 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ char	*string_l(size_t col[7], t_info *node)
 {
 	char	*str;
 
-	str = (char *)ft_memalloc(col[6] + 10);
+	if (!(str = (char *)ft_memalloc(col[6] + 10)))
+		return (NULL);
 	str = ft_memset(str, 32, col[6] + 9);
 	setstr(str, node->ftr, col[0]);
 	setstr(str, node->links, col[1] + 1);

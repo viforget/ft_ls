@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:04:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/17 15:13:41 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/26 16:16:12 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int					parsing(char **argv);
 
 char				*ft_xattr(char *path);
 char				*file_type(int value);
-void				stock_l(t_info *noeud);
+int					stock_l(t_info *noeud);
 
 /*
 ** BINARY_TREE.C

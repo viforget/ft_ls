@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/16 18:20:05 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/17 14:49:42 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/26 15:16:42 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void			ft_ls(char *path)
 	dir = opendir(path);
 	if (dir)
 	{
-		tree = create_tree(dir, path, &blocks, col);
+		if (!(tree = create_tree(dir, path, &blocks, col)))
+			return ;
 		closedir(dir);
 		if (is_on(g_flags, OPT_L) && ft_find_right(tree))
 		{

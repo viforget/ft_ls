@@ -6,7 +6,7 @@
 /*   By: ntom <ntom@student.s19.be>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/25 13:53:02 by ntom              #+#    #+#             */
-/*   Updated: 2019/08/07 18:48:37 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/26 16:21:19 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,17 @@ char		*majmin(dev_t rdev)
 	int		i;
 	int		j;
 
-	str = (char *)malloc(sizeof(char) * 8);
+	if (!(str = (char *)malloc(sizeof(char) * 8))
+	|| !(tp = ft_itoa(major(rdev))))
+		return (NULL);
 	str = ft_memset(str, ' ', 8);
-	tp = ft_itoa(major(rdev));
 	i = ft_strlen(tp) - 1;
 	j = 1;
 	while (i >= 0)
 		str[j--] = tp[i--];
 	ft_strdel(&tp);
-	tp = ft_itoa(minor(rdev));
+	if (!(tp = ft_itoa(minor(rdev))))
+		return (NULL);
 	i = ft_strlen(tp) - 1;
 	j = 6;
 	while (i >= 0)
@@ -85,12 +87,15 @@ static void	option_l2(t_info *node)
 		node->size_majmin = majmin(node->stats.st_rdev);
 }
 
-void		stock_l(t_info *node)
+int			stock_l(t_info *node)
 {
 	char *tmp;
 
 	tmp = NULL;
 	option_l2(node);
+	if (!(node->ftr) || !(node->links) || !(node->uid)
+	|| !(node->grid) || !(node->size_majmin))
+		return (1);
 	tmp = ctime(&node->stats.st_mtime);
 	tmp[10] = '\0';
 	tmp[16] = '\0';
@@ -101,4 +106,7 @@ void		stock_l(t_info *node)
 		node->hour_year = ft_strdup(tmp + 20);
 	else
 		node->hour_year = ft_strdup(tmp + 11);
+	if (!(node->month_day) || !(node->hour_year))
+		return (1);
+	return (0);
 }

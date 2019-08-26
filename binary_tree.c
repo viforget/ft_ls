@@ -6,7 +6,7 @@
 /*   By: viforget <viforget@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/20 13:54:27 by viforget          #+#    #+#             */
-/*   Updated: 2019/08/15 18:52:17 by ntom             ###   ########.fr       */
+/*   Updated: 2019/08/26 16:14:48 by ntom             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@ t_info		*noeud_stock(t_info *noeud, char *file, char *path
 		str = ft_strjoin(path, "/");
 	else
 		str = ft_strdup(path);
-	noeud = ft_memalloc(sizeof(t_info));
-	noeud->name = ft_strdup(file);
+	if (!(noeud = ft_memalloc(sizeof(t_info)))
+	|| !(noeud->name = ft_strdup(file)) || !(str))
+		return (NULL);
 	noeud->path = ft_strjoin(str, noeud->name);
 	ft_strdel(&str);
 	noeud->status = lstat(noeud->path, &(buf));
 	noeud->stats = buf;
 	if (is_on(g_flags, OPT_L))
-		stock_l(noeud);
+		if (stock_l(noeud) == 1)
+			return (NULL);
 	if (is_on(g_flags, OPT_L)
 		&& (is_on(g_flags, OPT_A) || file[0] != '.'))
 		*blocks += buf.st_blocks;
@@ -82,7 +84,8 @@ t_info		*create_tree(DIR *rep, char *path, unsigned int *blocks
 	dirr = readdir(rep);
 	while (dirr)
 	{
-		file = noeud_stock(tree, dirr->d_name, path, blocks);
+		if (!(file = noeud_stock(tree, dirr->d_name, path, blocks)))
+			return (NULL);
 		cnt_column(file, col);
 		tree = bin_stock(tree, file, FILES);
 		dirr = readdir(rep);
